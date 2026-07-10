@@ -1,0 +1,70 @@
+<% layout("../layout") %>
+<%~ include("../partials/myrecord-tabs", it) %>
+
+<h1>Personal details</h1>
+
+<p class="guidance">
+  <strong>Amendments/Corrections</strong> to previous qualifications should be made by printing this page,
+  and taking it to the Applicant Information Desk.
+</p>
+<p class="guidance">
+  In the majority of cases, for name changes to be made you will need to bring an official form of ID
+  with you e.g. Birth Certificate, Passport, Marriage Certificate, EU national identity card, adoption
+  certificate or Deed Poll.
+</p>
+
+<table class="details-table">
+  <tbody>
+    <tr>
+      <th scope="row">Registration Number</th>
+      <td><%= it.student.registrationNumber %></td>
+    </tr>
+    <tr>
+      <th scope="row">Student Support Number</th>
+      <td><%= it.student.studentSupportNumber || '—' %></td>
+    </tr>
+    <tr>
+      <th scope="row">HUSID</th>
+      <td><code><%= it.student.husid %></code></td>
+    </tr>
+    <tr>
+      <th scope="row">Name</th>
+      <td><%= it.student.name %></td>
+    </tr>
+    <tr>
+      <th scope="row">Date of Birth</th>
+      <td><%= it.student.dateOfBirth %></td>
+    </tr>
+    <tr>
+      <th scope="row">Home/Overseas</th>
+      <td><%= it.student.homeOverseas %></td>
+    </tr>
+    <tr>
+      <th scope="row">Ethnic Origin</th>
+      <td><%= it.student.ethnicOrigin %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Next of Kin</h2>
+
+<% if (it.student.nextOfKin && it.student.nextOfKin.length) { %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Relationship</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% it.student.nextOfKin.forEach(function(kin) { %>
+    <tr>
+      <td><%= kin.name %></td>
+      <td><%= kin.relationship %></td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+<% } else { %>
+<p class="empty-state">No next of kin recorded.</p>
+<% } %>

@@ -1,0 +1,2208 @@
+/** UTILITY CLASSES */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.hide {
+  display: none;
+}
+
+
+/** DESIGN TOKENS */
+:root {
+  --uos-purple: #440099;
+  --uos-purple-dark: #2d0066;
+  --uos-purple-tint: #f1ebfa;
+  --ink: #131e29;
+  --ink-soft: #4b5563;
+  --ink-faint: #9ca3af;
+  --card-bg: #ffffff;
+  --card-border: #e3e5e8;
+  --card-border-hover: #c9b3e8;
+  --card-radius: 0;
+  --card-shadow-hover: 0 2px 10px rgba(19, 30, 41, 0.07);
+  --hairline: #eceef0;
+  --border-strong: #c9cdd2;
+  --hover-bg: #f4f5f7;
+  --surface-faint: #fafbfc;
+  --radius: 6px;
+  --badge-red: #c8102e;
+  --badge-green: #2e7d32;
+}
+
+
+/** ICONS (inline SVG, fill inherits currentColor) */
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.icon--sm {
+  width: 18px;
+  height: 18px;
+}
+
+/* Manage-card icon — small and neutral; the accent is reserved for state */
+.icon--manage {
+  width: 22px;
+  height: 22px;
+  color: var(--ink-soft);
+}
+
+.icon--tile {
+  width: 22px;
+  height: 22px;
+  color: var(--uos-purple);
+}
+
+.icon--chevron {
+  width: 18px;
+  height: 18px;
+  color: var(--ink-faint);
+  margin-left: auto;
+  align-self: center;
+}
+
+.icon--back {
+  width: 16px;
+  height: 16px;
+  transform: rotate(180deg);
+}
+
+
+/** HEADINGS — the branding CSS sets a fixed body line-height (1.6rem ≈ 27px)
+    that headings inherit, so any heading larger than ~27px overflows its own
+    line box upward and misaligns with adjacent elements. Give headings a
+    proportional line-height. */
+body.uosall h1,
+body.uosall h2,
+body.uosall h3 {
+  line-height: 1.25;
+}
+
+/* Page titles are always bold — override the branding CSS's inherited weight.
+   (The dashboard greeting keeps its own serif-400 rule via higher specificity.) */
+body.uosall h1 {
+  font-weight: 700;
+}
+
+
+/** BODY / LAYOUT */
+body.uosall {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  margin-bottom: 0 !important;
+  background-color: #eff1f2;
+}
+
+body.uosall .page-content {
+  display: flex;
+  flex: 1;
+}
+
+body.uosall footer {
+  position: relative;
+}
+
+
+/** HEADER — white bar with logo, app title, bell + avatar */
+header.uosheader.portal-header {
+  border-bottom: 1px solid var(--card-border);
+  position: relative;
+  z-index: 5;
+}
+
+.header-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+body.uosall .header-actions button.header-bell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+body.uosall .header-actions button.header-bell:hover {
+  background: var(--hover-bg);
+  border: none;
+}
+
+.header-bell .icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* Person icon centred in a tinted circle stands in for a profile photo. */
+.header-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--uos-purple-tint);
+  border: 1px solid #ded0f2;
+  user-select: none;
+}
+
+.header-avatar .icon--avatar {
+  width: 24px;
+  height: 24px;
+  color: var(--uos-purple);
+}
+
+.header-bell-wrap {
+  position: relative;
+}
+
+.bell-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--badge-red);
+  color: #fff;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+}
+
+/* Bell dropdown — dummy alerts for now */
+.notifications-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 320px;
+  max-width: calc(100vw - 2rem);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(19, 30, 41, 0.16);
+  z-index: 40;
+}
+
+body.uosall .notifications-panel__title {
+  margin: 0;
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ink-soft);
+}
+
+.notifications-panel__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.notification {
+  position: relative;
+  padding: 0.65rem 0.9rem 0.65rem 1.7rem;
+}
+
+.notification + .notification {
+  border-top: 1px solid var(--hairline);
+}
+
+.notification--unread::before {
+  content: "";
+  position: absolute;
+  left: 0.65rem;
+  top: 1.05rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--uos-purple);
+}
+
+body.uosall .notification__text {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+body.uosall .notification__time {
+  margin: 0.15rem 0 0;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+
+/** SIDEBAR NAVIGATION — white card with icon rows. State is carried by a
+    violet left-edge indicator bar + tint on the active row; resting icons
+    stay neutral so the accent only ever means "you are here".
+    Custom .portal-nav class avoids the branding CSS's .sidebar-nav rules
+    (absolute positioning, mobile hiding) entirely. */
+.portal-nav {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+}
+
+.portal-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.portal-nav li {
+  margin: 0;
+}
+
+.portal-nav li.nav-divider {
+  border-top: 1px solid var(--hairline);
+  margin: 0.4rem 0;
+}
+
+body.uosall .portal-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.75rem;
+  border-left: 3px solid transparent;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.portal-nav a .icon {
+  color: var(--ink-soft);
+}
+
+body.uosall .portal-nav a:hover {
+  background: var(--hover-bg);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+body.uosall .portal-nav a:focus-visible {
+  outline: 2px solid var(--uos-purple);
+  outline-offset: -2px;
+}
+
+body.uosall .portal-nav a[aria-current="page"] {
+  border-left-color: var(--uos-purple);
+  background: var(--uos-purple-tint);
+  color: var(--uos-purple);
+  font-weight: 600;
+}
+
+body.uosall .portal-nav a[aria-current="page"] .icon {
+  color: var(--uos-purple);
+}
+
+.nav-badge {
+  margin-left: auto;
+  min-width: 1.4rem;
+  padding: 0.05rem 0.42rem;
+  border-radius: 999px;
+  background: var(--badge-red);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Logout — styled like a nav row, separated by a hairline */
+.nav-logout {
+  border-top: 1px solid var(--hairline);
+  margin: 0.4rem 0 0;
+  padding-top: 0.4rem;
+}
+
+body.uosall .nav-logout button {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  margin: 0;
+  padding: 0.6rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+
+.nav-logout button .icon {
+  color: var(--ink-soft);
+}
+
+body.uosall .nav-logout button:hover {
+  background: var(--hover-bg);
+  color: var(--ink);
+  border: none;
+  border-left: 3px solid transparent;
+}
+
+body.uosall .nav-logout button:focus-visible {
+  outline: 2px solid var(--uos-purple);
+  outline-offset: -2px;
+}
+
+
+/** CONTENT CARD — non-dashboard pages render inside a white panel */
+.content-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: 1.5rem;
+}
+
+
+/** DASHBOARD — greeting */
+.dash-greeting {
+  margin-bottom: 1.5rem;
+}
+
+body.uosall .dash-greeting h1 {
+  font-size: 1.75rem;
+  color: var(--uos-purple);
+  margin: 0 0 0.3rem;
+}
+
+body.uosall .dash-meta {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* Section headings — plain heading-scale type, no ornament. Hierarchy comes
+   from size, weight, and spacing; card-level headings (panel titles and
+   in-card section headings) carry a full-width hairline rule underneath. */
+body.uosall .dash-section-title {
+  margin: 2.4rem 0 1rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+
+/** DASHBOARD — registration banner. The statutory task gets top billing and
+    the page's only solid violet button; the left rule reuses the alert
+    grammar (coloured left edge = needs attention). */
+.reg-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  padding: 1.15rem 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--uos-purple);
+}
+
+.reg-banner__body {
+  flex: 1 1 380px;
+  min-width: 0;
+}
+
+body.uosall .reg-banner__title {
+  margin: 0 0 0.3rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+body.uosall .reg-banner__desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+body.uosall a.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  padding: 0.55rem 1.4rem;
+  background: var(--uos-purple);
+  border-radius: var(--radius);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+body.uosall a.btn-primary:hover {
+  background: var(--uos-purple-dark);
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--uos-purple);
+  outline-offset: 2px;
+}
+
+/** OWNERSHIP TAG — small reusable label marking data or actions owned by an
+    external service (e.g. "Managed in UCAS Hub"), so the portal/UCAS boundary
+    is visible wherever it matters. */
+.owner-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.14rem 0.55rem;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: var(--hover-bg);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+
+/** DASHBOARD — offer status card. Read-only summary of what the university
+    holds about a UCAS-owned offer: the portal tracks, UCAS transacts. */
+.offer-status {
+  margin-top: 1.25rem;
+  padding: 1.15rem 1.25rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+}
+
+body.uosall .offer-status__title {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+body.uosall .offer-status__list {
+  margin: 0;
+}
+
+.offer-status__row {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 0.5rem 1.5rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--hairline);
+}
+
+body.uosall .offer-status__label {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+body.uosall .offer-status__value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+body.uosall .offer-status__footnote {
+  margin: 0.75rem 0 0;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--hairline);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 560px) {
+  .offer-status__row {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
+
+
+/** DASHBOARD — "Things to do" task rows. One white list, full-width rows
+    divided by hairlines: pill + title + reason left, outline CTA right.
+    Rows keep the section's silhouette intact at any task count. */
+body.uosall .task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+}
+
+.task {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.task:first-child {
+  border-top: none;
+}
+
+.task__body {
+  flex: 1 1 380px;
+  min-width: 0;
+}
+
+.task__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.15rem;
+}
+
+body.uosall .task__title {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+body.uosall .task__desc {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+body.uosall a.task__cta {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--uos-purple);
+  border-radius: var(--radius);
+  color: var(--uos-purple);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+body.uosall a.task__cta:hover {
+  background: var(--uos-purple-tint);
+  color: var(--uos-purple);
+  text-decoration: none;
+}
+
+.task__cta:focus-visible {
+  outline: 2px solid var(--uos-purple);
+  outline-offset: 2px;
+}
+
+
+/** DASHBOARD — "Manage" card grid */
+.manage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+body.uosall a.manage-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  color: var(--ink);
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+body.uosall a.manage-card:hover {
+  border-color: var(--card-border-hover);
+  box-shadow: var(--card-shadow-hover);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.manage-card:focus-visible {
+  outline: 2px solid var(--uos-purple);
+  outline-offset: 2px;
+}
+
+.manage-card__head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.15rem;
+}
+
+.manage-card__title {
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.manage-card:hover .manage-card__title {
+  color: var(--uos-purple);
+}
+
+.manage-card__desc {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+
+/** BADGE PILLS */
+.pill {
+  border-radius: 999px;
+  padding: 0.22rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+.pill--success {
+  background: #e4f2e6;
+  color: #1e6b2e;
+}
+
+.pill--danger {
+  background: #fdeaec;
+  color: #a50d26;
+}
+
+.pill--neutral {
+  background: #eef0f2;
+  color: var(--ink-soft);
+}
+
+
+/** DASHBOARD — "Discover Sheffield" cards. The one deliberately colourful
+    moment on the dashboard: each card carries a themed top rule + tinted icon
+    chip. External marketing links, so every card opens in a new tab. */
+body.uosall .discover-intro {
+  margin: -0.5rem 0 1rem;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+/* Explicit column counts (1 → 2×2 → 4-up) so the four cards never leave an
+   orphan row the way auto-fill would. */
+.discover-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .discover-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .discover-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+body.uosall a.discover-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.15rem 1.25rem 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-top: 3px solid var(--discover-accent, var(--uos-purple));
+  border-radius: var(--card-radius);
+  color: var(--ink);
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+body.uosall a.discover-card:hover {
+  border-color: var(--card-border-hover);
+  border-top-color: var(--discover-accent, var(--uos-purple));
+  box-shadow: var(--card-shadow-hover);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.discover-card:focus-visible {
+  outline: 2px solid var(--uos-purple);
+  outline-offset: 2px;
+}
+
+.discover-card__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--discover-tint, var(--uos-purple-tint));
+}
+
+.discover-card__chip .icon {
+  width: 22px;
+  height: 22px;
+  color: var(--discover-accent, var(--uos-purple));
+}
+
+.discover-card__title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.icon--discover-ext {
+  width: 14px;
+  height: 14px;
+  color: var(--ink-faint);
+}
+
+.discover-card:hover .discover-card__title {
+  color: var(--discover-accent, var(--uos-purple));
+}
+
+.discover-card__desc {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* Card themes — accent + tint pairs, all AA against white */
+.discover-card--purple {
+  --discover-accent: var(--uos-purple);
+  --discover-tint: var(--uos-purple-tint);
+}
+
+.discover-card--coral {
+  --discover-accent: #c8102e;
+  --discover-tint: #fdeaec;
+}
+
+.discover-card--green {
+  --discover-accent: #1e6b2e;
+  --discover-tint: #e4f2e6;
+}
+
+.discover-card--aqua {
+  --discover-accent: #00699e;
+  --discover-tint: #e2f2fa;
+}
+
+
+/** DASHBOARD — Key dates. The academic year set as a quiet timeline:
+    right-aligned date column, violet node on a hairline rail, event and
+    context stacked beside it. Chronology drawn as chronology. */
+body.uosall .keydates-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.keydate {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  column-gap: 1.6rem;
+  margin: 0;
+  padding: 0 0 1.4rem;
+}
+
+.keydate:last-child {
+  padding-bottom: 0;
+}
+
+.keydate__date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.keydate__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding-left: 1.6rem;
+}
+
+/* Timeline node */
+.keydate__body::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3rem;
+  z-index: 1;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--uos-purple);
+  border-radius: 50%;
+  background: var(--card-bg);
+}
+
+/* Connector rail down to the next node (node's white fill masks the joint) */
+.keydate:not(:last-child) .keydate__body::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 1.1rem;
+  bottom: -1.8rem;
+  width: 1px;
+  background: var(--card-border);
+}
+
+.keydate__title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.keydate__sub {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+
+/** MYRECORD SUBNAV — underline tabs on a hairline baseline. The active tab's
+    2px violet rule sits on top of the baseline (the -1px li margin overlaps
+    the two). */
+.subnav {
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.subnav::-webkit-scrollbar {
+  display: none;
+}
+
+.subnav ul {
+  display: flex;
+  gap: 0.25rem;
+  width: max-content;
+  min-width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.subnav li {
+  margin: 0 0 -1px;
+}
+
+body.uosall .subnav a {
+  display: block;
+  padding: 0.5rem 0.9rem;
+  border-bottom: 2px solid transparent;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+body.uosall .subnav a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--border-strong);
+  text-decoration: none;
+}
+
+body.uosall .subnav a.is-active {
+  color: var(--uos-purple);
+  border-bottom-color: var(--uos-purple);
+  font-weight: 600;
+}
+
+.subnav a:focus-visible {
+  outline: 2px solid var(--uos-purple);
+  outline-offset: -2px;
+}
+
+/* Back link shown under the tabs on individual address pages */
+body.uosall a.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 1.1rem;
+  color: var(--uos-purple);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+body.uosall a.back-link:hover {
+  color: var(--uos-purple-dark);
+  text-decoration: underline;
+}
+
+
+/** ADDRESS HUB — navigation list. One bordered list, full-width rows divided
+    by hairlines: icon + title + description left, chevron right. Rows keep
+    long titles and uneven descriptions aligned where a card grid can't. */
+.link-list {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  max-width: 720px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  background: var(--card-bg);
+}
+
+.link-list li {
+  margin: 0;
+}
+
+.link-list li + li {
+  border-top: 1px solid var(--hairline);
+}
+
+body.uosall a.link-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.25rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+body.uosall a.link-row:hover {
+  background: var(--hover-bg);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.link-row:focus-visible {
+  outline: 2px solid var(--uos-purple);
+  outline-offset: -2px;
+}
+
+.link-row__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.link-row__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.link-row:hover .link-row__title {
+  color: var(--uos-purple);
+}
+
+.link-row__desc {
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+
+/** NOTICE — inline informational banner (violet tint) */
+body.uosall .notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 1.25rem 0 0.5rem;
+  padding: 0.8rem 1rem;
+  background: var(--uos-purple-tint);
+  border: 1px solid #ded0f2;
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #3a2a5e;
+}
+
+.notice .icon {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  color: var(--uos-purple);
+}
+
+
+/** PROGRAMME RECORD — bordered panels group each concern (programme,
+    enrolment, options); heads carry small quiet titles so the data inside
+    stays the loudest thing in every group. */
+.prog-panel {
+  margin: 1.5rem 0 0;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+body.uosall .prog-panel__head {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.prog-panel__head--split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+}
+
+body.uosall .prog-panel__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.prog-panel__meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+body.uosall .prog-panel__note {
+  margin: 0.4rem 0 0;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  max-width: 640px;
+}
+
+.programme-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+body.uosall .programme-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+body.uosall .programme-dept {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.def-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.9rem 1.5rem;
+  margin: 0;
+  padding: 1.15rem 1.25rem 1.3rem;
+  max-width: 900px;
+}
+
+.def-grid dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.1rem;
+}
+
+.def-grid dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+
+/** CREDIT SUMMARY BAR — sits between the enrolled panel's head and table */
+.credit-strip {
+  padding: 0.9rem 1.25rem 1rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.credit-strip .credit-bar,
+.credit-strip .credit-legend {
+  max-width: 560px;
+}
+
+.credit-bar {
+  display: flex;
+  height: 10px;
+  border-radius: 999px;
+  background: #e9ebee;
+  overflow: hidden;
+  margin-bottom: 0.6rem;
+}
+
+.credit-bar__confirmed {
+  background: var(--uos-purple);
+}
+
+.credit-bar__pending {
+  background: #b39ddb;
+}
+
+.credit-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.credit-legend .dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+}
+
+.dot--confirmed {
+  background: var(--uos-purple);
+}
+
+.dot--pending {
+  background: #b39ddb;
+}
+
+
+/** MODULE TABLES */
+.table-scroll {
+  overflow-x: auto;
+}
+
+.modules-table {
+  min-width: 640px;
+  margin-bottom: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.modules-table td {
+  vertical-align: middle;
+}
+
+/* Full-bleed panel tables align their first/last cells with the panel edge */
+.prog-panel .modules-table th:first-child,
+.prog-panel .modules-table td:first-child {
+  padding-left: 1.25rem;
+}
+
+.prog-panel .modules-table th:last-child,
+.prog-panel .modules-table td:last-child {
+  padding-right: 1.25rem;
+}
+
+.cell-code {
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.cell-title {
+  font-weight: 600;
+}
+
+.cell-num {
+  white-space: nowrap;
+}
+
+.cell-action {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.cell-muted {
+  color: var(--ink-faint);
+}
+
+.pill--pending {
+  background: #fdf3e0;
+  color: #8a5a00;
+}
+
+/* Small in-table action buttons — override the branding's chunky defaults */
+body.uosall button.btn-table {
+  margin: 0;
+  padding: 0.28rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.4;
+  background: #fff;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+body.uosall button.btn-table--add {
+  border: 1px solid var(--uos-purple);
+  color: var(--uos-purple);
+}
+
+body.uosall button.btn-table--add:hover {
+  background: var(--uos-purple-tint);
+  border: 1px solid var(--uos-purple);
+}
+
+body.uosall button.btn-table--drop {
+  border: 1px solid #e5b6bd;
+  color: #a50d26;
+}
+
+body.uosall button.btn-table--drop:hover {
+  background: #fdeaec;
+  border: 1px solid #d98a95;
+}
+
+body.uosall button.btn-table--neutral {
+  border: 1px solid var(--card-border);
+  color: var(--ink-soft);
+}
+
+body.uosall button.btn-table--neutral:hover {
+  background: var(--hover-bg);
+  border: 1px solid var(--border-strong);
+}
+
+
+/** TIMETABLE PAGE HEADER */
+.frame-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.frame-header > div {
+  flex: 1 1 340px;
+  min-width: 0;
+}
+
+body.uosall a.btn-external {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  margin-top: 0.3rem;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--uos-purple);
+  border-radius: var(--radius);
+  color: var(--uos-purple);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+body.uosall a.btn-external:hover {
+  background: var(--uos-purple-tint);
+  color: var(--uos-purple);
+  text-decoration: none;
+}
+
+.icon--external {
+  width: 16px;
+  height: 16px;
+}
+
+.icon--flip {
+  transform: rotate(180deg);
+}
+
+
+/** WEEKLY TIMETABLE GRID */
+.tt-widget {
+  margin-top: 1.25rem;
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  background: #fff;
+}
+
+.tt-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--uos-purple);
+  color: #fff;
+}
+
+.tt-toolbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+body.uosall a.tt-nav-btn,
+body.uosall span.tt-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+}
+
+body.uosall a.tt-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  text-decoration: none;
+}
+
+body.uosall a.tt-nav-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.tt-nav-btn .icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+body.uosall a.tt-nav-btn--today {
+  width: auto;
+  border-radius: 15px;
+  padding: 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+body.uosall a.tt-nav-btn--today[aria-current="true"] {
+  background: #fff;
+  border-color: #fff;
+  color: var(--uos-purple);
+}
+
+/* Past the first/last week of the semester there is nowhere to go */
+body.uosall span.tt-nav-btn--disabled {
+  opacity: 0.35;
+}
+
+/* Reading week — the grid renders empty, so say why */
+body.uosall .tt-empty {
+  margin: 0;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  background: var(--surface-faint);
+}
+
+.tt-toolbar__week {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.6rem;
+  min-width: 0;
+}
+
+.tt-toolbar__week strong {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.tt-toolbar__week span {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.tt-scroll {
+  overflow-x: auto;
+}
+
+.tt-grid {
+  /* --tt-slots is set inline by the template: one row per 30 minutes */
+  display: grid;
+  grid-template-columns: 56px repeat(5, minmax(126px, 1fr));
+  grid-template-rows: auto repeat(var(--tt-slots), 26px);
+  min-width: 720px;
+}
+
+.tt-corner,
+.tt-dayhead {
+  grid-row: 1;
+  background: var(--hover-bg);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.tt-dayhead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.5rem 0.25rem;
+  border-left: 1px solid var(--card-border);
+  text-align: center;
+}
+
+.tt-dayhead__name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.tt-dayhead__date {
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+}
+
+.tt-time {
+  grid-column: 1;
+  padding: 0.15rem 0.5rem 0 0;
+  border-top: 1px solid var(--card-border);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-align: right;
+}
+
+.tt-daycol {
+  border-left: 1px solid var(--card-border);
+  /* hour lines (solid) over half-hour lines (faint) */
+  background-image:
+    repeating-linear-gradient(to bottom, var(--card-border) 0 1px, transparent 1px 52px),
+    repeating-linear-gradient(to bottom, #f1f2f4 0 1px, transparent 1px 26px);
+}
+
+.tt-daycol--alt {
+  background-color: var(--surface-faint);
+}
+
+.tt-event {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  margin: 2px 4px;
+  padding: 0.25rem 0.45rem;
+  overflow: hidden;
+  border-left: 3px solid var(--uos-purple);
+  border-radius: 4px;
+  background: var(--uos-purple-tint);
+  font-size: 0.72rem;
+  line-height: 1.3;
+  color: var(--ink-soft);
+}
+
+.tt-event__title {
+  color: var(--ink);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.tt-event__title strong {
+  color: var(--uos-purple);
+}
+
+.tt-event__where,
+.tt-event__meta {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+/** USEFUL LINKS — MUSE-style A-Z of services: filter box, letter-chip index,
+    lettered groups. The filter is progressive enhancement (script.js). */
+.az-filter {
+  margin: 1.25rem 0 1rem;
+}
+
+body.uosall .az-filter label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+body.uosall .az-filter input {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+body.uosall .az-filter input:focus-visible {
+  outline: 2px solid var(--uos-purple);
+  outline-offset: 1px;
+}
+
+.az-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+body.uosall .az-index a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  color: var(--uos-purple);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+body.uosall .az-index a:hover {
+  background: var(--uos-purple-tint);
+  text-decoration: none;
+}
+
+body.uosall .az-index a:focus-visible {
+  outline: 2px solid var(--uos-purple);
+  outline-offset: 1px;
+}
+
+/* display:inline-flex above would defeat the hidden attribute the filter sets */
+body.uosall .az-index a[hidden] {
+  display: none;
+}
+
+body.uosall .az-status {
+  min-height: 1.4rem;
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.az-group {
+  scroll-margin-top: 1rem;
+}
+
+body.uosall .az-letter {
+  margin: 1.5rem 0 0.35rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--uos-purple);
+}
+
+body.uosall .az-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 900px) {
+  body.uosall .az-list {
+    columns: 2;
+    column-gap: 3rem;
+  }
+}
+
+.az-list li {
+  margin: 0;
+  break-inside: avoid;
+}
+
+body.uosall .az-list a {
+  display: block;
+  padding: 0.3rem 0;
+  color: var(--uos-purple);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+body.uosall .az-list a:hover {
+  text-decoration: underline;
+}
+
+
+/** SMALL PRINT */
+body.uosall .small-print {
+  margin-top: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+
+/** DEMO SCENARIO WIDGET — fixed corner dropdown of lifecycle states. A
+    prototype-only control, so it floats outside the page grid. */
+.demo-widget {
+  position: fixed;
+  right: 1.1rem;
+  bottom: 1.1rem;
+  z-index: 65;
+  padding: 0.55rem 0.7rem 0.65rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(19, 30, 41, 0.16);
+}
+
+body.uosall .demo-widget__label {
+  display: block;
+  margin: 0 0 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+body.uosall .demo-widget select {
+  display: block;
+  width: 230px;
+  margin: 0;
+  padding: 0.4rem 0.5rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+body.uosall .demo-widget select:focus-visible {
+  outline: 2px solid var(--uos-purple);
+  outline-offset: 1px;
+}
+
+@media (max-width: 767px) {
+  /* Clear the fixed mobile tab bar */
+  .demo-widget {
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+
+/** MOBILE BOTTOM BAR + NAVIGATION SHEET */
+.mobile-tabbar,
+.mobile-nav,
+.mobile-nav-backdrop {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* Reserve space so the fixed bar never covers page content / footer */
+  body.uosall {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .portal-sidebar {
+    display: none;
+  }
+
+  .mobile-tabbar {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    background: #fff;
+    border-top: 1px solid var(--card-border);
+    box-shadow: 0 -1px 8px rgba(19, 30, 41, 0.06);
+    padding: 0.4rem 0.75rem calc(0.4rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.uosall .mobile-tabbar button.mobile-menu-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin: 0;
+    padding: 0.25rem 2rem;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--uos-purple);
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+  }
+
+  body.uosall .mobile-tabbar button.mobile-menu-btn:hover,
+  body.uosall .mobile-tabbar button.mobile-menu-btn:active {
+    background: var(--uos-purple-tint);
+    border: none;
+  }
+
+  .mobile-menu-btn .icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Backdrop */
+  .mobile-nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    background: rgba(19, 30, 41, 0.55);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+
+  body.nav-open .mobile-nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Slide-up sheet */
+  .mobile-nav {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 80;
+    max-height: 85dvh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 14px 14px 0 0;
+    box-shadow: 0 -10px 32px rgba(19, 30, 41, 0.25);
+    padding: 0.6rem 1rem calc(1rem + env(safe-area-inset-bottom, 0px));
+    transform: translateY(100%);
+    visibility: hidden;
+    transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1), visibility 0.28s;
+  }
+
+  body.nav-open .mobile-nav {
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .mobile-nav__handle {
+    width: 38px;
+    height: 4px;
+    margin: 0 auto 0.6rem;
+    border-radius: 999px;
+    background: #d4d8dc;
+  }
+
+  .mobile-nav__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .mobile-nav__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  body.uosall .mobile-nav button.mobile-nav__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    padding: 0;
+    background: var(--hover-bg);
+    border: none;
+    border-radius: 50%;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .mobile-nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-nav__list li {
+    margin: 0;
+  }
+
+  body.uosall .mobile-nav__list a {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 0.6rem;
+    border-radius: 8px;
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .mobile-nav__list a .icon {
+    color: var(--uos-purple);
+    width: 22px;
+    height: 22px;
+  }
+
+  body.uosall .mobile-nav__list a:active,
+  body.uosall .mobile-nav__list a:hover {
+    background: var(--hover-bg);
+    text-decoration: none;
+  }
+
+  body.uosall .mobile-nav__list a[aria-current="page"] {
+    background: var(--uos-purple-tint);
+    color: var(--uos-purple);
+    font-weight: 700;
+  }
+
+  .mobile-nav__logout {
+    border-top: 1px solid var(--hairline);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  body.uosall .mobile-nav__logout button {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    margin: 0;
+    padding: 0.8rem 0.6rem;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .mobile-nav__logout button .icon {
+    color: var(--uos-purple);
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Body scroll lock while the sheet is open */
+  body.nav-open {
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav,
+  .mobile-nav-backdrop,
+  body.uosall a.manage-card,
+  body.uosall a.discover-card,
+  body.uosall .subnav a {
+    transition: none;
+  }
+
+  body.uosall a.manage-card:hover {
+    transform: none;
+  }
+}
+
+
+/** USER INFO (legacy — kept for pages that still render it) */
+.user-info {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+
+/** FORM STYLING */
+body.uosall input[type=radio] {
+  accent-color: #440099;
+}
+
+body.uosall label,
+body.uosall .button {
+  font-weight: 500 !important;
+}
+
+.button:focus-visible {
+  outline-offset: 2px;
+  outline: 2px solid var(--focus-outline-color, #000000);
+}
+
+.button--primary {
+  --focus-outline-color: #046c7e;
+}
+
+
+/** PAGE HEADER ROW (title + action button side by side) */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+
+/** TABLES — flatten the branding CSS's fully-boxed cell borders to
+    horizontal hairlines only */
+body.uosall table,
+body.uosall td,
+body.uosall th {
+  border: none;
+  border-bottom: 1px solid var(--hairline);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+th {
+  font-weight: 600;
+  background: var(--surface-faint);
+}
+
+/* Column headers everywhere match the def-grid label voice — small, quiet,
+   uppercase — so data outweighs its scaffolding on every page. (Row headers,
+   e.g. the personal-details table, keep normal case.) */
+body.uosall thead th {
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: var(--surface-faint);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.inline-form {
+  display: inline;
+}
+
+.empty-state {
+  color: var(--ink-soft);
+}
+
+
+/** ALERT / FLASH MESSAGES */
+.alert {
+  display: block;
+  width: min(90%, 640px);
+  padding: 1rem;
+  font-size: 0.975rem;
+  word-wrap: break-word;
+  margin-block-end: 1rem;
+  border-radius: var(--radius);
+}
+
+.alert p:first-child { margin-top: 0; }
+.alert p:last-child  { margin-bottom: 0; }
+
+.alert--success {
+  background: #e8f5e9;
+  border-left: 4px solid #2e7d32;
+  color: #1b5e20;
+}
+
+.alert--warning {
+  background: #fff8e1;
+  border-left: 4px solid #f9a825;
+  color: #5f4000;
+}
+
+.alert--error {
+  background: #fde8e8;
+  border-left: 4px solid #b71c1c;
+  color: #7a0000;
+}
+
+
+/** GRID OVERFLOW FIX */
+.grid {
+  overflow: visible;
+}
+
+body.uosall .its img {
+  width: 200px;
+}
+
+
+/** DETAIL TABLE (personal details read-only) */
+.details-table {
+  max-width: 640px;
+}
+
+.details-table th {
+  width: 45%;
+  font-weight: 600;
+  background: var(--surface-faint);
+  vertical-align: top;
+}
+
+.details-table td {
+  vertical-align: top;
+}
+
+
+/** GUIDANCE TEXT */
+.guidance {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.75rem;
+  max-width: 640px;
+}
+
+
+/** POSTCODE SPLIT FIELD */
+.postcode-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+body.uosall input.input--postcode-out {
+  width: 5rem;
+  text-transform: uppercase;
+}
+
+body.uosall input.input--postcode-in {
+  width: 4rem;
+  text-transform: uppercase;
+}
+
+
+/** PIN FIELD */
+body.uosall input.input--pin {
+  max-width: 12rem;
+}
+
+
+/** FORM FIELD LAYOUT — stack each label above its input in a single column.
+    The branding CSS leaves labels display:inline, so constrained-width inputs
+    (e.g. the PIN fields) would otherwise flow side by side. */
+.uosall .form label,
+.uosall .pin-form label,
+.uosall .address-form label {
+  display: block;
+  margin-bottom: .5rem;
+}
+
+.uosall .form label input,
+.uosall .form label select,
+.uosall .form label textarea,
+.uosall .pin-form label input,
+.uosall .address-form label input {
+  display: block;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+
+/** FORMS INSIDE CONTENT CARDS — keep line lengths readable and give the
+    submit button a clear primary treatment */
+.content-card form {
+  max-width: 640px;
+}
+
+body.uosall .content-card form button[type="submit"]:not(.btn-table) {
+  margin-top: 0.75rem;
+  padding: 0.55rem 1.5rem;
+  background: var(--uos-purple);
+  border: none;
+  border-radius: var(--radius);
+  color: #fff;
+  font-weight: 600;
+}
+
+body.uosall .content-card form button[type="submit"]:not(.btn-table):hover {
+  background: var(--uos-purple-dark);
+  border: none;
+}
+
+
+/** FORM HINT — branding styles p.form-hint as a badge with margin-bottom:20px,
+    which clashes with the input below. Override the spacing only (higher
+    specificity than the branding's .uosall p.form-hint) and keep the badge look. */
+body.uosall p.form-hint {
+  margin-top: 0.2rem;
+  margin-bottom: 0;
+}

@@ -1,0 +1,32 @@
+<% layout("../layout") %>
+<%~ include("../partials/myrecord-tabs", it) %>
+<%
+  const addressTiles = [
+    { href: "/myrecord/sheffield-address", title: "Sheffield address", desc: "Your term-time address while studying in Sheffield." },
+    { href: "/myrecord/home-address", title: "Home address", desc: "Your permanent home address." },
+    { href: "/myrecord/correspondence-address", title: "Correspondence address", desc: "Where the University sends official post." },
+    { href: "/myrecord/landlords-address", title: "Landlord's address", desc: "Contact details for your landlord or letting agent." },
+    { href: "/myrecord/prospective-address", title: "Prospective address", desc: "An address you are planning to move to." },
+    { href: "/myrecord/future-address", title: "Correspondence or future address", desc: "Set up a new correspondence address in advance." },
+  ];
+%>
+
+<h1>Addresses</h1>
+<p class="guidance">
+  View and update the addresses the University holds for you. Choose an address type below.
+</p>
+
+<ul class="link-list">
+  <% addressTiles.forEach(function (tile) { %>
+  <li>
+    <a class="link-row" href="<%= tile.href %>">
+      <%~ include("../partials/icon", { name: "place", cls: "icon--tile" }) %>
+      <span class="link-row__body">
+        <span class="link-row__title"><%= tile.title %></span>
+        <span class="link-row__desc"><%= tile.desc %></span>
+      </span>
+      <%~ include("../partials/icon", { name: "chevron", cls: "icon--chevron" }) %>
+    </a>
+  </li>
+  <% }) %>
+</ul>

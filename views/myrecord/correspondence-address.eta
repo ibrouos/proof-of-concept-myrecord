@@ -1,0 +1,5 @@
+<% layout("../layout") %>
+<%~ include("../partials/myrecord-tabs", it) %>
+
+<h1>Correspondence address</h1>
+<p class="guidance">This page is not yet built. Your correspondence address will appear here.</p>

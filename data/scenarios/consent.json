@@ -1,0 +1,44 @@
+{
+  "label": "Registered — consent needed",
+  "courseLine": "CS1IBR - Computer Science, Year 3",
+  "nav": ["dashboard", "myrecord", "programmes", "exams", "fees", "timetable", "useful-links"],
+  "banner": {
+    "title": "Confirm your programme for 2026-27",
+    "lead": "Confirm by Friday 9 October 2026.",
+    "desc": "You're registered — now review your enrolled modules and confirm your programme of study so your student record is complete.",
+    "cta": "Review and confirm",
+    "href": "/programmes-and-modules"
+  },
+  "actions": [
+    {
+      "pill": "Required",
+      "tone": "danger",
+      "title": "Confirm your term-time address",
+      "desc": "A statutory requirement — it also keeps your council tax exemption valid.",
+      "cta": "Confirm address",
+      "href": "/myrecord/sheffield-address"
+    },
+    {
+      "pill": "Recommended",
+      "tone": "neutral",
+      "title": "Add an emergency contact",
+      "desc": "We will only use it if something serious happens.",
+      "cta": "Add contact",
+      "href": "/myrecord/personal-details"
+    }
+  ],
+  "manage": [
+    { "href": "/myrecord", "icon": "person", "title": "MyRecord", "desc": "Personal details, addresses, UCARD" },
+    { "href": "/exams-and-myresults", "icon": "settings", "title": "Exams & MyResults", "desc": "View marks and outcomes" },
+    { "href": "/mytimetable", "icon": "calendar", "title": "MyTimetable", "desc": "Teaching and exam timetables" },
+    { "href": "/fees-and-finance", "icon": "paid", "title": "Fees & finance", "desc": "Balance and due dates" },
+    { "href": "/programmes-and-modules", "icon": "apps", "title": "Programmes and modules", "desc": "Enrolled modules and credits" },
+    { "href": "/useful-links", "icon": "link", "title": "Useful Links", "desc": "Quick links to other University services" }
+  ],
+  "keyDates": [
+    { "day": "9", "month": "Oct", "title": "Programme confirmation due", "sub": "Review and consent" },
+    { "day": "12", "month": "Nov", "title": "Fee instalment 2 of 3 due", "sub": "Tuition fees 2026-27" },
+    { "day": "11", "month": "Jan", "title": "Exam period begins", "sub": "Autumn semester assessments" },
+    { "day": "5", "month": "Feb", "title": "Results released", "sub": "Autumn semester" }
+  ]
+}

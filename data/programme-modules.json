@@ -1,0 +1,33 @@
+{
+  "academicYear": "2026-27",
+  "creditTarget": 120,
+  "changeWindow": {
+    "isOpen": true,
+    "closes": "Friday 25 September 2026"
+  },
+  "programme": {
+    "code": "COMU13",
+    "title": "BSc Computer Science",
+    "department": "School of Computer Science",
+    "level": "Level 3 (final year)",
+    "yearOfStudy": "3 of 3",
+    "mode": "Full-time",
+    "started": "September 2024",
+    "expectedCompletion": "June 2027",
+    "status": "Registered"
+  },
+  "enrolledModules": [
+    { "code": "COM3610", "title": "Dissertation Project", "credits": 40, "semester": "Full year", "type": "Core", "status": "Confirmed" },
+    { "code": "COM3420", "title": "Machine Learning", "credits": 20, "semester": "Autumn", "type": "Core", "status": "Confirmed" },
+    { "code": "COM3110", "title": "Text Processing", "credits": 10, "semester": "Autumn", "type": "Optional", "status": "Confirmed" },
+    { "code": "COM3520", "title": "Advanced Operating Systems", "credits": 20, "semester": "Spring", "type": "Optional", "status": "Confirmed" },
+    { "code": "COM3504", "title": "The Intelligent Web", "credits": 20, "semester": "Spring", "type": "Optional", "status": "Confirmed" },
+    { "code": "COM3502", "title": "Speech Processing", "credits": 10, "semester": "Autumn", "type": "Optional", "status": "Pending approval" }
+  ],
+  "availableModules": [
+    { "code": "COM3240", "title": "Reinforcement Learning", "credits": 10, "semester": "Autumn" },
+    { "code": "COM3221", "title": "Parallel Computing with GPUs", "credits": 10, "semester": "Spring" },
+    { "code": "COM3524", "title": "Bio-Inspired Computing", "credits": 20, "semester": "Spring" },
+    { "code": "COM3116", "title": "Automated Software Verification", "credits": 10, "semester": "Spring" }
+  ]
+}

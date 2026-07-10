@@ -1,0 +1,31 @@
+<% layout("./layout") %>
+
+<h1>CAS Debug</h1>
+
+<p>This page shows the raw CAS session data for the currently logged-in user. It is intended for diagnosing which attributes the CAS server releases.</p>
+
+<h2>User</h2>
+<p><strong>Username:</strong> <%= it.user?.username ?? "(none)" %></p>
+
+<h2>Released attributes</h2>
+<% const attrs = it.user?.attributes ?? {}; %>
+<% if (Object.keys(attrs).length === 0) { %>
+<p>No attributes were released by CAS.</p>
+<% } else { %>
+<table class="table">
+  <thead>
+    <tr><th>Attribute</th><th>Value</th></tr>
+  </thead>
+  <tbody>
+    <% Object.entries(attrs).forEach(function([key, value]) { %>
+    <tr>
+      <td><%= key %></td>
+      <td><%= Array.isArray(value) ? value.join(", ") : String(value) %></td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+<% } %>
+
+<h2>Raw session.cas</h2>
+<pre><%= JSON.stringify(it.cas, null, 2) %></pre>

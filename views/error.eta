@@ -1,0 +1,11 @@
+<% layout("./layout") %>
+
+<h1>Error</h1>
+<p><%= it.message %></p>
+
+<% if (it.error?.stack && !it.isProduction) { %>
+<details>
+  <summary>Stack trace</summary>
+  <pre><%= it.error.stack %></pre>
+</details>
+<% } %>

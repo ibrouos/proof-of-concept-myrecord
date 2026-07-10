@@ -1,0 +1,21 @@
+<% layout("../layout") %>
+<%~ include("../partials/myrecord-tabs", it) %>
+
+<h1>Change UCARD PIN number</h1>
+
+<p class="guidance">Your UCard PIN must be kept secret. Choose a number you will remember.</p>
+
+<form method="POST" action="/myrecord/ucard-pin" class="pin-form">
+  <input type="hidden" name="_csrf" value="<%= it.csrfToken %>" />
+
+  <label>Current PIN:<span class="req">* (required)</span>
+  <input name="oldPin" type="password" class="input--pin" inputmode="numeric" autocomplete="current-password" required></label>
+
+  <label>New PIN:<span class="req">* (required)</span>
+  <input name="newPin" type="password" class="input--pin" inputmode="numeric" autocomplete="new-password" required></label>
+
+  <label>Confirm new PIN:<span class="req">* (required)</span>
+  <input name="confirmPin" type="password" class="input--pin" inputmode="numeric" autocomplete="new-password" required></label>
+
+  <button type="submit">Change PIN</button>
+</form>

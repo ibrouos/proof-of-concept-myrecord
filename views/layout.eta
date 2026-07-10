@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= it.title %> | <%= it.appName %></title>
+    <link rel="stylesheet" href="https://www.sheffield.ac.uk/branding/webapps/1.0/css/main.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <link rel="icon" href="https://www.sheffield.ac.uk/branding/webapps/1.0/assets/favicon.ico" />
+  </head>
+
+  <%
+    /* Shared nav model — rendered in the desktop sidebar and the mobile sheet.
+       The list comes from utils/nav.js filtered by the selected demo scenario
+       (app.js locals), so each lifecycle state sees only its own sections. */
+    const navItems = it.navItems;
+    const isActive = (item) =>
+      item.exact ? it.path === item.href : it.path.startsWith(item.href);
+  %>
+
+  <body class="uosall">
+    <a class="skip-main" href="#main">Skip to main content</a>
+
+    <header class="uosheader portal-header">
+      <div class="headcontainer">
+        <div class="logo">
+          <a href="/">
+            <img
+              alt="University of Sheffield Logo"
+              src="https://www.sheffield.ac.uk/branding/webapps/1.0/assets/logo.svg"
+              class="respImg"
+              width="425"
+              height="129"
+            />
+          </a>
+        </div>
+        <div class="app-title short-title"><%= it.appName %></div>
+        <div class="header-actions">
+          <div class="header-bell-wrap">
+            <button
+              type="button"
+              class="header-bell"
+              id="header-bell"
+              aria-label="Notifications (3 unread)"
+              aria-expanded="false"
+              aria-controls="notifications-panel"
+            >
+              <%~ include("./partials/icon", { name: "bell" }) %>
+              <span class="bell-badge" aria-hidden="true">3</span>
+            </button>
+            <!-- Dummy notifications — replace with a real feed when one exists. -->
+            <div class="notifications-panel" id="notifications-panel" hidden>
+              <p class="notifications-panel__title">Notifications</p>
+              <ul class="notifications-panel__list">
+                <li class="notification notification--unread">
+                  <p class="notification__text">Your request to add INF6032 Data Analysis has been approved.</p>
+                  <p class="notification__time">2 hours ago</p>
+                </li>
+                <li class="notification notification--unread">
+                  <p class="notification__text">The Semester 2 exam timetable is now available in Exams &amp; MyResults.</p>
+                  <p class="notification__time">Yesterday</p>
+                </li>
+                <li class="notification notification--unread">
+                  <p class="notification__text">Your tuition fee instalment is due on 15 July.</p>
+                  <p class="notification__time">2 days ago</p>
+                </li>
+                <li class="notification">
+                  <p class="notification__text">Your Sheffield address was updated successfully.</p>
+                  <p class="notification__time">Last week</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <% if (it.user) { %>
+          <div class="header-avatar" title="Signed in as <%= it.user.username %>">
+            <%~ include("./partials/icon", { name: "person", cls: "icon--avatar" }) %>
+          </div>
+          <% } else { %>
+          <div class="header-avatar" aria-hidden="true">
+            <%~ include("./partials/icon", { name: "person", cls: "icon--avatar" }) %>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="grid">
+
+        <div class="col-3-12 portal-sidebar">
+          <nav class="portal-nav" aria-label="Main">
+            <ul>
+              <% navItems.forEach(function (item) { %>
+              <% if (item.divider) { %><li class="nav-divider" aria-hidden="true"></li><% } %>
+              <li>
+                <a href="<%= item.href %>"<%~ isActive(item) ? ' aria-current="page"' : '' %>>
+                  <%~ include("./partials/icon", { name: item.icon }) %>
+                  <span class="nav-label"><%= item.label %></span>
+                  <% if (item.badge) { %><span class="nav-badge"><%= item.badge %></span><% } %>
+                </a>
+              </li>
+              <% }) %>
+            </ul>
+
+            <% if (it.user) { %>
+            <form method="POST" action="/logout" class="nav-logout">
+              <input type="hidden" name="_csrf" value="<%= it.csrfToken %>" />
+              <button type="submit">
+                <%~ include("./partials/icon", { name: "logout" }) %>
+                <span class="nav-label">Logout</span>
+              </button>
+            </form>
+            <% } %>
+          </nav>
+        </div>
+
+        <main id="main" class="content col-9-12">
+          <% if (it.flash?.error?.length) { %>
+          <div class="alert alert--warning" role="alert">
+            <% it.flash.error.forEach(function(msg) { %><p><%~ msg %></p><% }) %>
+          </div>
+          <% } %>
+          <% if (it.flash?.success?.length) { %>
+          <div class="alert alert--success" role="alert">
+            <% it.flash.success.forEach(function(msg) { %><p><%~ msg %></p><% }) %>
+          </div>
+          <% } %>
+          <% if (it.flash?.warning?.length) { %>
+          <div class="alert alert--warning" role="alert">
+            <% it.flash.warning.forEach(function(msg) { %><p><%~ msg %></p><% }) %>
+          </div>
+          <% } %>
+
+          <% if (it.path === "/") { %>
+          <%~ it.body %>
+          <% } else { %>
+          <div class="content-card"><%~ it.body %></div>
+          <% } %>
+        </main>
+
+      </div><!--end grid-->
+    </div><!--end page-content-->
+
+    <footer>
+      <div class="grid">
+        <div class="its">
+          <img
+            src="https://www.sheffield.ac.uk/branding/webapps/1.0/assets/ITS-UoS-white-horizontal.svg"
+            alt="University of Sheffield | IT Services"
+            width="674"
+            height="139"
+          />
+        </div>
+        <div class="footer-links">
+          <a href="https://www.sheffield.ac.uk/privacy">Privacy Policy</a>
+          <a href="https://www.sheffield.ac.uk/accessibility">Accessibility</a>
+        </div>
+        <div>&copy; <%= it.copyrightYear %> The University of Sheffield</div>
+      </div>
+    </footer>
+
+    <!-- Mobile app-style bottom bar + slide-up navigation sheet -->
+    <div class="mobile-tabbar">
+      <button
+        type="button"
+        class="mobile-menu-btn"
+        id="mobile-menu-btn"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <%~ include("./partials/icon", { name: "menu" }) %>
+        <span>Menu</span>
+      </button>
+    </div>
+
+    <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" aria-hidden="true"></div>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Main menu" aria-hidden="true">
+      <div class="mobile-nav__handle" aria-hidden="true"></div>
+      <div class="mobile-nav__header">
+        <span class="mobile-nav__title">Menu</span>
+        <button type="button" class="mobile-nav__close" id="mobile-nav-close" aria-label="Close menu">
+          <%~ include("./partials/icon", { name: "close" }) %>
+        </button>
+      </div>
+      <ul class="mobile-nav__list">
+        <% navItems.forEach(function (item) { %>
+        <li>
+          <a href="<%= item.href %>"<%~ isActive(item) ? ' aria-current="page"' : '' %>>
+            <%~ include("./partials/icon", { name: item.icon }) %>
+            <span class="nav-label"><%= item.label %></span>
+            <% if (item.badge) { %><span class="nav-badge"><%= item.badge %></span><% } %>
+            <%~ include("./partials/icon", { name: "chevron", cls: "icon--chevron" }) %>
+          </a>
+        </li>
+        <% }) %>
+      </ul>
+      <% if (it.user) { %>
+      <form method="POST" action="/logout" class="mobile-nav__logout">
+        <input type="hidden" name="_csrf" value="<%= it.csrfToken %>" />
+        <button type="submit">
+          <%~ include("./partials/icon", { name: "logout" }) %>
+          <span class="nav-label">Logout</span>
+        </button>
+      </form>
+      <% } %>
+    </nav>
+
+    <!-- Demo scenario switcher — fixed corner dropdown, prototype-only control.
+         GET form so it works without JS (script.js submits on change). -->
+    <form class="demo-widget" method="GET" action="/">
+      <label class="demo-widget__label" for="demo-scenario-select">Demo scenario</label>
+      <select id="demo-scenario-select" name="view">
+        <% it.scenarioOptions.forEach(function (opt) { %>
+        <option value="<%= opt.key %>"<%~ opt.key === it.scenarioKey ? " selected" : "" %>><%= opt.label %></option>
+        <% }) %>
+      </select>
+    </form>
+
+    <script src="https://www.sheffield.ac.uk/branding/webapps/1.0/js/script.js"></script>
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

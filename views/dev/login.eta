@@ -1,0 +1,52 @@
+<% layout("../layout") %>
+
+<h1>Dev login</h1>
+<p>This page is only available outside of production. It bypasses CAS and sets a fake session directly.</p>
+
+<% if (it.casSession) { %>
+<div class="alert alert--success" role="status">
+  <p>Currently signed in as <strong><%= it.casSession.user %></strong>.</p>
+  <p>
+    <a href="/" class="button button--primary">Go to app</a>
+    &nbsp;
+    <form method="POST" action="/dev/logout" class="inline-form">
+      <input type="hidden" name="_csrf" value="<%= it.csrfToken %>" />
+      <button type="submit" class="button button--secondary">Sign out</button>
+    </form>
+  </p>
+</div>
+<% } %>
+
+<hr />
+
+<form method="POST" action="/dev/login" class="form">
+  <input type="hidden" name="_csrf" value="<%= it.csrfToken %>" />
+
+  <fieldset>
+    <legend>CAS session</legend>
+
+    <div class="form-group">
+      <label for="username">Username <span aria-hidden="true">*</span></label>
+      <input type="text" id="username" name="username" required autocomplete="off"
+        value="<%= it.casSession?.user ?? '' %>" />
+    </div>
+
+    <div class="form-group">
+      <label for="shefPersonCode">shefPersonCode</label>
+      <input type="text" id="shefPersonCode" name="shefPersonCode" autocomplete="off"
+        value="<%= it.casSession?.attributes?.shefPersonCode?.[0] ?? '' %>"
+        placeholder="e.g. 1234567" />
+    </div>
+
+    <div class="form-group">
+      <label for="employeeType">employeeType</label>
+      <input type="text" id="employeeType" name="employeeType" autocomplete="off"
+        value="<%= it.casSession?.attributes?.employeeType?.[0] ?? 'student' %>"
+        placeholder="student or staff" />
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <button type="submit" class="button button--primary">Set session</button>
+  </div>
+</form>

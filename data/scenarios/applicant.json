@@ -1,0 +1,52 @@
+{
+  "label": "Offer holder — reply due in UCAS",
+  "courseLine": "Applicant · BSc Computer Science (conditional offer)",
+  "nav": ["dashboard", "myrecord", "fees", "useful-links"],
+  "banner": {
+    "title": "You have an offer for 2026-27",
+    "lead": "Respond by Wednesday 4 August 2026.",
+    "desc": "Your conditional offer for BSc Computer Science is waiting for your reply. Offer replies are made in UCAS Hub, not here.",
+    "cta": "Reply in UCAS Hub",
+    "href": "https://www.ucas.com/dashboard",
+    "external": true
+  },
+  "offerStatus": {
+    "title": "Your offer status",
+    "rows": [
+      { "label": "Offer type", "value": "Conditional" },
+      { "label": "Conditions", "value": "AAB at A Level including Mathematics" },
+      { "label": "Your reply", "value": "No reply received yet", "owner": "Managed in UCAS Hub" },
+      { "label": "Reply by", "value": "Wednesday 4 August 2026" }
+    ],
+    "footnote": "Status updates from UCAS can take 24–48 hours to appear here."
+  },
+  "actions": [
+    {
+      "pill": "Required",
+      "tone": "danger",
+      "title": "Upload your qualification documents",
+      "desc": "If admissions has asked you for certificates or transcripts, upload them here.",
+      "cta": "Upload documents",
+      "href": "/your-offer"
+    },
+    {
+      "pill": "Recommended",
+      "tone": "neutral",
+      "title": "Book an applicant open day",
+      "desc": "See the department and meet teaching staff before you decide.",
+      "cta": "Book a visit",
+      "href": "/useful-links"
+    }
+  ],
+  "manage": [
+    { "href": "/myrecord", "icon": "person", "title": "MyRecord", "desc": "Personal details and contact information" },
+    { "href": "/fees-and-finance", "icon": "paid", "title": "Fees & funding", "desc": "Tuition fees, loans, and scholarships" },
+    { "href": "/useful-links", "icon": "link", "title": "Useful Links", "desc": "Quick links to other University services" }
+  ],
+  "keyDates": [
+    { "day": "4", "month": "Aug", "title": "Offer response deadline", "sub": "Reply through UCAS Hub" },
+    { "day": "13", "month": "Aug", "title": "A-level results day", "sub": "Offer conditions confirmed" },
+    { "day": "1", "month": "Sept", "title": "Accommodation applications open", "sub": "Guaranteed for first-years" },
+    { "day": "28", "month": "Sept", "title": "Teaching starts", "sub": "Autumn semester 2026-27" }
+  ]
+}

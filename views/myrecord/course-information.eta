@@ -1,0 +1,5 @@
+<% layout("../layout") %>
+<%~ include("../partials/myrecord-tabs", it) %>
+
+<h1>Course information</h1>
+<p class="guidance">This page is not yet built. Course information will appear here.</p>

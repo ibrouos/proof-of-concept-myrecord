@@ -1,0 +1,10 @@
+<% layout("../layout") %>
+<%~ include("../partials/myrecord-tabs", it) %>
+
+<h1>Prospective address</h1>
+
+<form method="POST" action="/myrecord/prospective-address" class="address-form">
+  <input type="hidden" name="_csrf" value="<%= it.csrfToken %>" />
+  <%~ include("../partials/address-fields", it) %>
+  <button type="submit">Save address</button>
+</form>

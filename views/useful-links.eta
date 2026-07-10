@@ -1,0 +1,36 @@
+<% layout("./layout") %>
+
+<h1>Useful Links</h1>
+<p class="guidance">
+  A&ndash;Z of University services and resources. Links open in a new tab.
+</p>
+
+<div class="az-filter">
+  <label for="az-filter-input">Start typing to filter</label>
+  <input
+    type="search"
+    id="az-filter-input"
+    placeholder="e.g. printing&hellip;"
+    autocomplete="off"
+    spellcheck="false"
+  />
+</div>
+
+<nav class="az-index" aria-label="A to Z index">
+  <% it.groups.forEach(function (group) { %>
+  <a href="#az-<%= group.letter %>" data-letter="<%= group.letter %>"><%= group.letter %></a>
+  <% }) %>
+</nav>
+
+<p class="az-status" id="az-status" aria-live="polite"></p>
+
+<% it.groups.forEach(function (group) { %>
+<section class="az-group" id="az-<%= group.letter %>" data-letter="<%= group.letter %>">
+  <h2 class="az-letter"><%= group.letter %></h2>
+  <ul class="az-list">
+    <% group.links.forEach(function (link) { %>
+    <li><a href="<%= link.href %>" target="_blank" rel="noopener noreferrer"><%= link.name %></a></li>
+    <% }) %>
+  </ul>
+</section>
+<% }) %>

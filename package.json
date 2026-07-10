@@ -1,0 +1,46 @@
+{
+  "name": "express-boilerplate",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20.10"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "cross-env NODE_ENV=development node --watch server.js",
+    "test": "cross-env NODE_ENV=test node --test test/**/*.js",
+    "test:e2e": "playwright test",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "connect-cas": "^1.8.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.7",
+    "csrf-csrf": "^3.2.0",
+    "dotenv": "^16.4.5",
+    "eta": "^3.4.0",
+    "express": "^5.0.1",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.18.0",
+    "helmet": "^8.0.0",
+    "pino": "^9.3.2",
+    "pino-http": "^10.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "@playwright/test": "^1.61.1",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.8.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.4.0",
+    "pino-pretty": "^11.2.1",
+    "prettier": "^3.3.3",
+    "supertest": "^7.0.0"
+  }
+}

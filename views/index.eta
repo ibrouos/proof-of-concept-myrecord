@@ -1,0 +1,9 @@
+<% layout("./layout") %>
+
+<h1>Welcome<% if (it.user) { %>, <%= it.user.username %><% } %></h1>
+<p>Your application is running.</p>
+
+<h2>Example routes</h2>
+<ul>
+  <li><a href="/debug/cas">/debug/cas</a> — shows the CAS attributes released for the current session</li>
+</ul>

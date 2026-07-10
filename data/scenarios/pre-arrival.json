@@ -1,0 +1,83 @@
+{
+  "label": "Pre-arrival — course confirmed",
+  "courseLine": "BSc Computer Science · starts 28 September 2026",
+  "nav": ["dashboard", "myrecord", "fees", "timetable", "useful-links"],
+  "banner": {
+    "title": "Welcome to Sheffield — get ready to start",
+    "lead": "Online registration opens Monday 14 September 2026.",
+    "desc": "Complete it before intro week so you can collect your UCARD on your first day.",
+    "cta": "See how to prepare",
+    "href": "/getting-started"
+  },
+  "actions": [
+    {
+      "pill": "Closes 1 Sept",
+      "tone": "danger",
+      "title": "Apply for University accommodation",
+      "desc": "Accommodation is guaranteed for first-years who apply by the deadline.",
+      "cta": "Apply for accommodation",
+      "href": "/accommodation"
+    },
+    {
+      "pill": "Required",
+      "tone": "danger",
+      "title": "Upload your UCARD photo",
+      "desc": "So your card is ready to collect when you arrive.",
+      "cta": "Upload photo",
+      "href": "/ucard-photo"
+    },
+    {
+      "pill": "Recommended",
+      "tone": "neutral",
+      "title": "Tell us about your funding",
+      "desc": "Link your student finance application so your payments are not delayed.",
+      "cta": "Add funding details",
+      "href": "/fees-and-finance"
+    }
+  ],
+  "discover": {
+    "title": "Discover Sheffield",
+    "intro": "You're going to love it here. A few things to explore before you arrive.",
+    "cards": [
+      {
+        "icon": "people",
+        "theme": "purple",
+        "title": "Students' Union",
+        "desc": "Repeatedly voted the UK's best — 300+ societies, gigs, bars, and your new favourite place between lectures.",
+        "href": "https://su.sheffield.ac.uk"
+      },
+      {
+        "icon": "city",
+        "theme": "coral",
+        "title": "The city",
+        "desc": "Big enough to be exciting, friendly enough to feel like home — with the Peak District on your doorstep.",
+        "href": "https://www.sheffield.ac.uk/study/city"
+      },
+      {
+        "icon": "home",
+        "theme": "green",
+        "title": "Accommodation",
+        "desc": "Catered halls, self-catered flats, studios — find the room that suits how you want to live.",
+        "href": "https://www.sheffield.ac.uk/accommodation"
+      },
+      {
+        "icon": "fitness",
+        "theme": "aqua",
+        "title": "Sport Sheffield",
+        "desc": "Gyms, pools, fitness classes and 60+ sports clubs — get active from your first week.",
+        "href": "https://www.sport-sheffield.com"
+      }
+    ]
+  },
+  "manage": [
+    { "href": "/myrecord", "icon": "person", "title": "MyRecord", "desc": "Personal details and contact information" },
+    { "href": "/fees-and-finance", "icon": "paid", "title": "Fees & funding", "desc": "Tuition fees, loans, and scholarships" },
+    { "href": "/useful-links", "icon": "link", "title": "Useful Links", "desc": "Quick links to other University services" }
+  ],
+  "keyDates": [
+    { "day": "1", "month": "Sept", "title": "Accommodation deadline", "sub": "First-year guarantee closes" },
+    { "day": "14", "month": "Sept", "title": "Online registration opens", "sub": "Complete before you arrive" },
+    { "day": "21", "month": "Sept", "title": "Intro week begins", "sub": "Collect your UCARD on campus" },
+    { "day": "28", "month": "Sept", "title": "Teaching starts", "sub": "Autumn semester 2026-27" }
+  ]
+}

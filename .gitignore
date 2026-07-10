@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Environment — never commit secrets
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Session store files (if using session-file-store)
+sessions/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Node internals
+*.pid
+*.seed
+*.pid.lock
+.node_repl_history
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/settings.json
+.idea/
+
+# Misc
+.npm
+.eslintcache
+*.tgz
+
+# AI
+.agents/
+.claude/

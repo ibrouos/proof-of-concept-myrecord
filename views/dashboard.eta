@@ -1,0 +1,149 @@
+<% layout("./layout") %>
+<%
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+  const rawName = it.user?.username || "";
+  const firstName = rawName ? rawName.split(/[\s.@_-]+/)[0] : "";
+  const displayName = firstName ? firstName[0].toUpperCase() + firstName.slice(1) : "there";
+  const today = new Date().toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  /* The whole dashboard is a function of the selected demo scenario
+     (data/scenarios/*.json, chosen in routes/index.js): banner, tasks,
+     manage cards, and key dates all come from it.dash. */
+  const dash = it.dash;
+%>
+
+<div class="dash-greeting">
+  <h1><%= greeting %>, <%= displayName %></h1>
+  <p class="dash-meta"><%= today %> &middot; <%= dash.courseLine %></p>
+</div>
+
+<% if (dash.banner) { %>
+<section class="reg-banner" aria-labelledby="banner-title">
+  <div class="reg-banner__body">
+    <h2 class="reg-banner__title" id="banner-title"><%= dash.banner.title %></h2>
+    <p class="reg-banner__desc">
+      <strong><%= dash.banner.lead %></strong> <%= dash.banner.desc %>
+    </p>
+  </div>
+  <%
+    /* banner.external marks a CTA whose transaction lives outside the portal
+       (for UG offers that's UCAS Hub — the university can only track, never
+       take the reply). A direct in-portal "Respond to your offer" action is
+       realistic only for postgraduate taught applicants, who apply to the
+       university directly — if a PGT persona is ever added, that scenario may
+       legitimately point its banner CTA at an internal reply page. */
+  %>
+  <% if (dash.banner.external) { %>
+  <a class="btn-primary" href="<%= dash.banner.href %>" target="_blank" rel="noopener noreferrer">
+    <%= dash.banner.cta %>
+    <%~ include("./partials/icon", { name: "external", cls: "icon--external" }) %>
+  </a>
+  <% } else { %>
+  <a class="btn-primary" href="<%= dash.banner.href %>"><%= dash.banner.cta %></a>
+  <% } %>
+</section>
+<% } %>
+
+<% if (dash.offerStatus) { %>
+<section class="offer-status" aria-labelledby="offer-status-title">
+  <h2 class="offer-status__title" id="offer-status-title"><%= dash.offerStatus.title %></h2>
+  <dl class="offer-status__list">
+    <% dash.offerStatus.rows.forEach(function (row) { %>
+    <div class="offer-status__row">
+      <dt class="offer-status__label"><%= row.label %></dt>
+      <dd class="offer-status__value">
+        <%= row.value %>
+        <% if (row.owner) { %>
+        <span class="owner-tag"><%= row.owner %></span>
+        <% } %>
+      </dd>
+    </div>
+    <% }) %>
+  </dl>
+  <% if (dash.offerStatus.footnote) { %>
+  <p class="offer-status__footnote"><%= dash.offerStatus.footnote %></p>
+  <% } %>
+</section>
+<% } %>
+
+<% if (dash.actions.length) { %>
+<h2 class="dash-section-title">Things to do</h2>
+
+<ul class="task-list">
+  <% dash.actions.forEach(function (a) { %>
+  <li class="task">
+    <div class="task__body">
+      <div class="task__head">
+        <h3 class="task__title"><%= a.title %></h3>
+        <span class="pill pill--<%= a.tone %>"><%= a.pill %></span>
+      </div>
+      <p class="task__desc"><%= a.desc %></p>
+    </div>
+    <a class="task__cta" href="<%= a.href %>"><%= a.cta %></a>
+  </li>
+  <% }) %>
+</ul>
+<% } %>
+
+<% if (dash.discover) { %>
+<section aria-labelledby="discover-title">
+  <h2 class="dash-section-title" id="discover-title"><%= dash.discover.title %></h2>
+  <% if (dash.discover.intro) { %>
+  <p class="discover-intro"><%= dash.discover.intro %></p>
+  <% } %>
+  <div class="discover-grid">
+    <% dash.discover.cards.forEach(function (card) { %>
+    <a
+      class="discover-card discover-card--<%= card.theme %>"
+      href="<%= card.href %>"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span class="discover-card__chip">
+        <%~ include("./partials/icon", { name: card.icon }) %>
+      </span>
+      <span class="discover-card__title">
+        <%= card.title %>
+        <%~ include("./partials/icon", { name: "external", cls: "icon--discover-ext" }) %>
+      </span>
+      <span class="discover-card__desc"><%= card.desc %></span>
+    </a>
+    <% }) %>
+  </div>
+</section>
+<% } %>
+
+<h2 class="dash-section-title">Manage</h2>
+
+<div class="manage-grid">
+  <% dash.manage.forEach(function (card) { %>
+  <a class="manage-card" href="<%= card.href %>">
+    <span class="manage-card__head">
+      <%~ include("./partials/icon", { name: card.icon, cls: "icon--manage" }) %>
+      <span class="manage-card__title"><%= card.title %></span>
+    </span>
+    <span class="manage-card__desc"><%= card.desc %></span>
+  </a>
+  <% }) %>
+</div>
+
+<section aria-labelledby="keydates-title">
+  <h2 class="dash-section-title" id="keydates-title">Key dates</h2>
+  <ul class="keydates-list">
+    <% dash.keyDates.forEach(function (e) { %>
+    <li class="keydate">
+      <span class="keydate__date"><%= e.day %> <%= e.month %></span>
+      <span class="keydate__body">
+        <span class="keydate__title"><%= e.title %></span>
+        <span class="keydate__sub"><%= e.sub %></span>
+      </span>
+    </li>
+    <% }) %>
+  </ul>
+</section>

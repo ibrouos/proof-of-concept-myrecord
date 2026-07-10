@@ -1,0 +1,37 @@
+<%
+  /* MyRecord sub-navigation — 4 grouped underline tabs. The six address pages all
+     live under the "Addresses" tab; its hub page (/myrecord/addresses) links
+     out to each one, keeping this bar short and scannable. */
+  const ADDRESS_PATHS = [
+    "/myrecord/addresses",
+    "/myrecord/sheffield-address",
+    "/myrecord/home-address",
+    "/myrecord/correspondence-address",
+    "/myrecord/landlords-address",
+    "/myrecord/prospective-address",
+    "/myrecord/future-address",
+  ];
+  const tabs = [
+    { href: "/myrecord/personal-details", label: "Personal details" },
+    { href: "/myrecord/course-information", label: "Course information" },
+    { href: "/myrecord/addresses", label: "Addresses", match: ADDRESS_PATHS },
+    { href: "/myrecord/ucard-pin", label: "UCARD PIN" },
+  ];
+  const isTabActive = (tab) => tab.match ? tab.match.includes(it.path) : it.path === tab.href;
+  const onAddressSubpage = ADDRESS_PATHS.includes(it.path) && it.path !== "/myrecord/addresses";
+%>
+<nav class="subnav" aria-label="myRecord sections">
+  <ul>
+    <% tabs.forEach(function (tab) { %>
+    <li>
+      <a href="<%= tab.href %>"<%~ isTabActive(tab) ? ' class="is-active" aria-current="page"' : '' %>><%= tab.label %></a>
+    </li>
+    <% }) %>
+  </ul>
+</nav>
+<% if (onAddressSubpage) { %>
+<a class="back-link" href="/myrecord/addresses">
+  <%~ include("./icon", { name: "chevron", cls: "icon--back" }) %>
+  All addresses
+</a>
+<% } %>

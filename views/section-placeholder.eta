@@ -1,0 +1,4 @@
+<% layout("./layout") %>
+
+<h1><%= it.title %></h1>
+<p class="guidance">This section is not yet built. Content for <strong><%= it.title %></strong> will appear here.</p>

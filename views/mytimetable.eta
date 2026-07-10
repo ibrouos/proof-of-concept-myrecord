@@ -1,0 +1,114 @@
+<% layout("./layout") %>
+
+<%
+  const tt = it.timetable;
+  const slots = (tt.dayEnd - tt.dayStart) * 2; // 30-minute rows
+  // "13:30" -> row offset in 30-min slots from the start of the day
+  const toSlot = (time) => {
+    const [h, m] = time.split(":").map(Number);
+    return (h - tt.dayStart) * 2 + (m >= 30 ? 1 : 0);
+  };
+  const hourLabel = (h) => (h % 12 === 0 ? 12 : h % 12) + (h < 12 ? "am" : "pm");
+%>
+
+<div class="frame-header">
+  <div>
+    <h1>MyTimetable</h1>
+    <p class="guidance">
+      Your teaching timetable for the week. Room and staff details are shown on each
+      class — always check the day before, as rooms occasionally change.
+    </p>
+  </div>
+  <a class="btn-external" href="<%= it.timetableUrl %>" target="_blank" rel="noopener">
+    Open in CMISGo
+    <%~ include("./partials/icon", { name: "chevron", cls: "icon--external" }) %>
+  </a>
+</div>
+
+<div class="tt-widget">
+  <div class="tt-toolbar">
+    <div class="tt-toolbar__nav">
+      <% if (it.week > 1) { %>
+      <a class="tt-nav-btn" href="/mytimetable?week=<%= it.week - 1 %>" aria-label="Previous week">
+        <%~ include("./partials/icon", { name: "chevron", cls: "icon--flip" }) %>
+      </a>
+      <% } else { %>
+      <span class="tt-nav-btn tt-nav-btn--disabled" aria-hidden="true">
+        <%~ include("./partials/icon", { name: "chevron", cls: "icon--flip" }) %>
+      </span>
+      <% } %>
+      <a
+        class="tt-nav-btn tt-nav-btn--today"
+        href="/mytimetable"
+        <%~ it.week === it.baseWeek ? 'aria-current="true"' : "" %>
+      >Today</a>
+      <% if (it.week < it.totalWeeks) { %>
+      <a class="tt-nav-btn" href="/mytimetable?week=<%= it.week + 1 %>" aria-label="Next week">
+        <%~ include("./partials/icon", { name: "chevron" }) %>
+      </a>
+      <% } else { %>
+      <span class="tt-nav-btn tt-nav-btn--disabled" aria-hidden="true">
+        <%~ include("./partials/icon", { name: "chevron" }) %>
+      </span>
+      <% } %>
+    </div>
+    <div class="tt-toolbar__week">
+      <strong><%= tt.week.range %></strong>
+      <span><%= tt.week.term %></span>
+    </div>
+  </div>
+
+  <% if (!tt.events.length) { %>
+  <p class="tt-empty">No teaching this week — enjoy your reading week.</p>
+  <% } %>
+
+  <div class="tt-scroll">
+    <div class="tt-grid" style="--tt-slots: <%= slots %>">
+
+      <div class="tt-corner"></div>
+      <% tt.days.forEach(function (day, d) { %>
+      <div class="tt-dayhead" style="grid-column: <%= d + 2 %>">
+        <span class="tt-dayhead__name"><%= day.name %></span>
+        <span class="tt-dayhead__date"><%= day.date %></span>
+      </div>
+      <% }) %>
+
+      <% for (let h = tt.dayStart; h < tt.dayEnd; h++) { %>
+      <div class="tt-time" style="grid-row: <%= 2 + (h - tt.dayStart) * 2 %> / span 2">
+        <%= hourLabel(h) %>
+      </div>
+      <% } %>
+
+      <% for (let d = 0; d < tt.days.length; d++) { %>
+      <div
+        class="tt-daycol<%= d % 2 ? " tt-daycol--alt" : "" %>"
+        style="grid-column: <%= d + 2 %>; grid-row: 2 / span <%= slots %>"
+        aria-hidden="true"
+      ></div>
+      <% } %>
+
+      <% tt.events.forEach(function (e) {
+        const start = toSlot(e.start);
+        const end = toSlot(e.end);
+      %>
+      <div
+        class="tt-event"
+        style="grid-column: <%= e.day + 2 %>; grid-row: <%= 2 + start %> / <%= 2 + end %>"
+        title="<%= e.module %> <%= e.type %>, <%= e.start %>–<%= e.end %>, <%= e.location %> (<%= e.staff %>)"
+      >
+        <span class="tt-event__title"><strong><%= e.module %></strong> <%= e.type %></span>
+        <span class="tt-event__where"><%= e.location %></span>
+        <% if (end - start >= 3) { %>
+        <span class="tt-event__meta"><%= e.start %>–<%= e.end %></span>
+        <% } %>
+      </div>
+      <% }) %>
+
+    </div>
+  </div>
+</div>
+
+<p class="small-print">
+  Prototype — showing sample data. Your live timetable is provided by the University
+  timetabling service (CMISGo).
+</p>

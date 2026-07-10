@@ -1,0 +1,34 @@
+<label>Address Line 1:<span class="req">* (required)</span>
+<input name="addressLine1" type="text" required autocomplete="address-line1"></label>
+
+<label>Address Line 2:
+<input name="addressLine2" type="text" autocomplete="address-line2"></label>
+
+<label>Address Line 3:
+<input name="addressLine3" type="text" autocomplete="address-line3"></label>
+
+<label>Town:<span class="req">* (required)</span>
+<input name="town" type="text" required autocomplete="address-level2"></label>
+
+<label>Region/County:
+<input name="regionCounty" type="text" autocomplete="address-level1"></label>
+
+<label>Country:<span class="req">* (required)</span>
+<input name="country" type="text" value="UNITED KINGDOM" required autocomplete="country-name"></label>
+
+<label>UK Post Code (outward):
+<p class="form-hint">e.g. S1 — required for UK addresses</p>
+<input name="postcodeOut" type="text" class="input--postcode-out" placeholder="S1" maxlength="4" autocomplete="postal-code" spellcheck="false"></label>
+
+<label>UK Post Code (inward):
+<p class="form-hint">e.g. 2HE</p>
+<input name="postcodeIn" type="text" class="input--postcode-in" placeholder="2HE" maxlength="3" spellcheck="false"></label>
+
+<label>Telephone:
+<input name="telephone" type="tel" autocomplete="tel"></label>
+
+<label>Mobile Phone:
+<input name="mobilePhone" type="tel" autocomplete="tel-national"></label>
+
+<label>Email:
+<input name="email" type="email" autocomplete="email" spellcheck="false"></label>

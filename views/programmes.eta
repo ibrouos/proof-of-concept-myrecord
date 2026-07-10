@@ -1,0 +1,163 @@
+<% layout("./layout") %>
+<%
+  const d = it.data;
+  const confirmed = d.enrolledModules
+    .filter((m) => m.status === "Confirmed")
+    .reduce((sum, m) => sum + m.credits, 0);
+  const pending = d.enrolledModules
+    .filter((m) => m.status !== "Confirmed")
+    .reduce((sum, m) => sum + m.credits, 0);
+  const confirmedPct = Math.min(100, Math.round((confirmed / d.creditTarget) * 100));
+  const pendingPct = Math.min(100 - confirmedPct, Math.round((pending / d.creditTarget) * 100));
+  const atTarget = confirmed + pending >= d.creditTarget;
+%>
+
+<h1>Programmes and modules</h1>
+<p class="guidance">Your programme of study and module enrolment for <%= d.academicYear %>.</p>
+
+<% if (d.changeWindow.isOpen) { %>
+<div class="notice">
+  <%~ include("./partials/icon", { name: "clock" }) %>
+  <div>
+    <strong>Module add and drop is open.</strong>
+    Changes for <%= d.academicYear %> can be requested until <%= d.changeWindow.closes %>.
+    Requests are not final until your department confirms them.
+  </div>
+</div>
+<% } %>
+
+<section class="prog-panel" aria-label="Your programme">
+  <div class="prog-panel__head">
+    <div class="programme-head">
+      <h2 class="programme-title"><%= d.programme.title %></h2>
+      <span class="pill pill--success"><%= d.programme.status %></span>
+    </div>
+    <p class="programme-dept"><%= d.programme.department %></p>
+  </div>
+  <dl class="def-grid">
+    <div><dt>Programme code</dt><dd><%= d.programme.code %></dd></div>
+    <div><dt>Level</dt><dd><%= d.programme.level %></dd></div>
+    <div><dt>Year of study</dt><dd><%= d.programme.yearOfStudy %></dd></div>
+    <div><dt>Mode of study</dt><dd><%= d.programme.mode %></dd></div>
+    <div><dt>Started</dt><dd><%= d.programme.started %></dd></div>
+    <div><dt>Expected completion</dt><dd><%= d.programme.expectedCompletion %></dd></div>
+  </dl>
+</section>
+
+<section class="prog-panel" aria-label="Enrolled modules">
+  <div class="prog-panel__head prog-panel__head--split">
+    <h2 class="prog-panel__title">Enrolled modules</h2>
+    <span class="prog-panel__meta"><%= d.academicYear %> &middot; <%= confirmed + pending %> of <%= d.creditTarget %> credits</span>
+  </div>
+  <div class="credit-strip">
+    <div
+      class="credit-bar"
+      role="img"
+      aria-label="<%= confirmed %> credits confirmed and <%= pending %> pending approval, of a <%= d.creditTarget %> credit target"
+    >
+      <span class="credit-bar__confirmed" style="width: <%= confirmedPct %>%"></span>
+      <span class="credit-bar__pending" style="width: <%= pendingPct %>%"></span>
+    </div>
+    <div class="credit-legend">
+      <span><span class="dot dot--confirmed"></span>Confirmed &middot; <%= confirmed %></span>
+      <span><span class="dot dot--pending"></span>Pending approval &middot; <%= pending %></span>
+    </div>
+  </div>
+  <div class="table-scroll">
+    <table class="modules-table">
+    <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">Module</th>
+        <th scope="col">Credits</th>
+        <th scope="col">Semester</th>
+        <th scope="col">Type</th>
+        <th scope="col">Status</th>
+        <th scope="col" class="cell-action"><span class="sr-only">Actions</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% d.enrolledModules.forEach(function (m) { %>
+      <tr>
+        <td class="cell-code"><%= m.code %></td>
+        <td class="cell-title"><%= m.title %></td>
+        <td class="cell-num"><%= m.credits %></td>
+        <td><%= m.semester %></td>
+        <td><%= m.type %></td>
+        <td>
+          <% if (m.status === "Confirmed") { %>
+          <span class="pill pill--success">Confirmed</span>
+          <% } else { %>
+          <span class="pill pill--pending">Pending approval</span>
+          <% } %>
+        </td>
+        <td class="cell-action">
+          <% if (m.status !== "Confirmed") { %>
+          <form method="POST" action="/programmes-and-modules/cancel" class="inline-form">
+            <input type="hidden" name="_csrf" value="<%= it.csrfToken %>" />
+            <input type="hidden" name="module" value="<%= m.code %>" />
+            <button type="submit" class="btn-table btn-table--neutral">Cancel request</button>
+          </form>
+          <% } else if (m.type === "Optional") { %>
+          <form method="POST" action="/programmes-and-modules/drop" class="inline-form">
+            <input type="hidden" name="_csrf" value="<%= it.csrfToken %>" />
+            <input type="hidden" name="module" value="<%= m.code %>" />
+            <button type="submit" class="btn-table btn-table--drop">Drop</button>
+          </form>
+          <% } else { %>
+          <span class="cell-muted" title="Core modules are a required part of your programme">&mdash;</span>
+          <% } %>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="prog-panel" aria-label="Available optional modules">
+  <div class="prog-panel__head">
+    <h2 class="prog-panel__title">Available optional modules</h2>
+    <% if (atTarget) { %>
+    <p class="prog-panel__note">
+      You are enrolled on the full <%= d.creditTarget %> credits. To add one of these modules,
+      request a drop first &mdash; your department will process both changes together.
+    </p>
+    <% } %>
+  </div>
+  <div class="table-scroll">
+    <table class="modules-table">
+    <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">Module</th>
+        <th scope="col">Credits</th>
+        <th scope="col">Semester</th>
+        <th scope="col" class="cell-action"><span class="sr-only">Actions</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% d.availableModules.forEach(function (m) { %>
+      <tr>
+        <td class="cell-code"><%= m.code %></td>
+        <td class="cell-title"><%= m.title %></td>
+        <td class="cell-num"><%= m.credits %></td>
+        <td><%= m.semester %></td>
+        <td class="cell-action">
+          <form method="POST" action="/programmes-and-modules/add" class="inline-form">
+            <input type="hidden" name="_csrf" value="<%= it.csrfToken %>" />
+            <input type="hidden" name="module" value="<%= m.code %>" />
+            <button type="submit" class="btn-table btn-table--add">Add</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+    </table>
+  </div>
+</section>
+
+<p class="small-print">
+  Module changes are reviewed by the <%= d.programme.department %>. You will receive an email
+  when a request is confirmed, usually within 5 working days.
+</p>

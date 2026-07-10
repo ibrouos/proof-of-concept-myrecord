@@ -1,0 +1,31 @@
+{
+  "week": {
+    "range": "12 October – 16 October 2026",
+    "term": "Autumn semester · Week 3"
+  },
+  "dayStart": 9,
+  "dayEnd": 18,
+  "days": [
+    { "name": "Monday", "date": "12 October 2026" },
+    { "name": "Tuesday", "date": "13 October 2026" },
+    { "name": "Wednesday", "date": "14 October 2026" },
+    { "name": "Thursday", "date": "15 October 2026" },
+    { "name": "Friday", "date": "16 October 2026" }
+  ],
+  "events": [
+    { "day": 0, "start": "10:00", "end": "11:00", "module": "COM2008", "type": "Lecture", "location": "Diamond LT2", "staff": "Dr S. North" },
+    { "day": 0, "start": "13:00", "end": "15:00", "module": "COM2008", "type": "Practical", "location": "Diamond CR-2", "staff": "Dr S. North" },
+    { "day": 0, "start": "16:00", "end": "17:00", "module": "COM2109", "type": "Lecture", "location": "Hicks LT A", "staff": "Prof A. Freitas" },
+    { "day": 1, "start": "09:00", "end": "10:00", "module": "COM2004", "type": "Lecture", "location": "Diamond LT1", "staff": "Prof J. Barker" },
+    { "day": 1, "start": "11:00", "end": "12:00", "module": "COM2107", "type": "Lecture", "location": "Arts Tower LT5", "staff": "Dr M. Stannett" },
+    { "day": 1, "start": "14:00", "end": "16:00", "module": "COM2004", "type": "Practical", "location": "Diamond CR-1", "staff": "Prof J. Barker" },
+    { "day": 2, "start": "09:00", "end": "10:00", "module": "COM2109", "type": "Lecture", "location": "Hicks LT A", "staff": "Prof A. Freitas" },
+    { "day": 2, "start": "11:00", "end": "12:00", "module": "COM2107", "type": "Tutorial", "location": "Regent Court G12", "staff": "Dr M. Stannett" },
+    { "day": 3, "start": "10:00", "end": "11:00", "module": "COM2107", "type": "Lecture", "location": "Arts Tower LT5", "staff": "Dr M. Stannett" },
+    { "day": 3, "start": "12:00", "end": "13:00", "module": "COM2008", "type": "Lecture", "location": "Diamond LT2", "staff": "Dr S. North" },
+    { "day": 3, "start": "15:00", "end": "16:00", "module": "COM2109", "type": "Problem class", "location": "Hicks Room F38", "staff": "Prof A. Freitas" },
+    { "day": 4, "start": "09:00", "end": "11:00", "module": "COM2109", "type": "Practical", "location": "Diamond CR-3", "staff": "Prof A. Freitas" },
+    { "day": 4, "start": "12:00", "end": "13:00", "module": "COM2004", "type": "Lecture", "location": "Diamond LT1", "staff": "Prof J. Barker" },
+    { "day": 4, "start": "14:00", "end": "15:00", "module": "COM2107", "type": "Lecture", "location": "Arts Tower LT5", "staff": "Dr M. Stannett" }
+  ]
+}
