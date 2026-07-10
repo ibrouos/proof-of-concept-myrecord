@@ -1,3 +1,11 @@
+Freaked out that we have a meeting on Tues so pushed up what I'd played around with (there's nothing in our jira about this 😭), this is just throwing everything at the wall (add more if you can) and we can refine it down and tidy up in meetings I guess 🤷‍♂️ probably get it more inline with web apps branding too (and to the new one)
+
+Not sure what apis are available I guess that's in someone elses ball park
+
+Break, play around, remove things, add things. If you push to this repo it should build on the link in the sidebar.
+
+Mix of coding and vibing, this is useful to get syntax highlighting on the templates [https://ejs.co](https://marketplace.visualstudio.com/items?itemName=DigitalBrainstem.javascript-ejs-support)
+
 # Recommended install
 - Install NVM with homebrew https://formulae.brew.sh/formula/nvm
 - Once installed open new terminal
