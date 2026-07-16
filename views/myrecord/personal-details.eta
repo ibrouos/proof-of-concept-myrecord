@@ -13,38 +13,36 @@
   certificate or Deed Poll.
 </p>
 
-<table class="details-table">
-  <tbody>
-    <tr>
-      <th scope="row">Registration Number</th>
-      <td><%= it.student.registrationNumber %></td>
-    </tr>
-    <tr>
-      <th scope="row">Student Support Number</th>
-      <td><%= it.student.studentSupportNumber || '—' %></td>
-    </tr>
-    <tr>
-      <th scope="row">HUSID</th>
-      <td><code><%= it.student.husid %></code></td>
-    </tr>
-    <tr>
-      <th scope="row">Name</th>
-      <td><%= it.student.name %></td>
-    </tr>
-    <tr>
-      <th scope="row">Date of Birth</th>
-      <td><%= it.student.dateOfBirth %></td>
-    </tr>
-    <tr>
-      <th scope="row">Home/Overseas</th>
-      <td><%= it.student.homeOverseas %></td>
-    </tr>
-    <tr>
-      <th scope="row">Ethnic Origin</th>
-      <td><%= it.student.ethnicOrigin %></td>
-    </tr>
-  </tbody>
-</table>
+<dl class="detail-list">
+  <div class="detail-list__row">
+    <dt class="detail-list__label">Registration Number</dt>
+    <dd class="detail-list__value"><%= it.student.registrationNumber %></dd>
+  </div>
+  <div class="detail-list__row">
+    <dt class="detail-list__label">Student Support Number</dt>
+    <dd class="detail-list__value"><%= it.student.studentSupportNumber || '—' %></dd>
+  </div>
+  <div class="detail-list__row">
+    <dt class="detail-list__label">HUSID</dt>
+    <dd class="detail-list__value detail-list__value--mono"><%= it.student.husid %></dd>
+  </div>
+  <div class="detail-list__row">
+    <dt class="detail-list__label">Name</dt>
+    <dd class="detail-list__value"><%= it.student.name %></dd>
+  </div>
+  <div class="detail-list__row">
+    <dt class="detail-list__label">Date of Birth</dt>
+    <dd class="detail-list__value"><%= it.student.dateOfBirth %></dd>
+  </div>
+  <div class="detail-list__row">
+    <dt class="detail-list__label">Home/Overseas</dt>
+    <dd class="detail-list__value"><%= it.student.homeOverseas %></dd>
+  </div>
+  <div class="detail-list__row">
+    <dt class="detail-list__label">Ethnic Origin</dt>
+    <dd class="detail-list__value"><%= it.student.ethnicOrigin %></dd>
+  </div>
+</dl>
 
 <h2>Next of Kin</h2>
 

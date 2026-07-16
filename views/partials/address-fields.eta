@@ -1,34 +1,30 @@
+<% const a = it.address || {}; %>
 <label>Address Line 1:<span class="req">* (required)</span>
-<input name="addressLine1" type="text" required autocomplete="address-line1"></label>
+<input name="addressLine1" type="text" required autocomplete="address-line1" value="<%= a.addressLine1 || "" %>"></label>
 
 <label>Address Line 2:
-<input name="addressLine2" type="text" autocomplete="address-line2"></label>
+<input name="addressLine2" type="text" autocomplete="address-line2" value="<%= a.addressLine2 || "" %>"></label>
 
 <label>Address Line 3:
-<input name="addressLine3" type="text" autocomplete="address-line3"></label>
+<input name="addressLine3" type="text" autocomplete="address-line3" value="<%= a.addressLine3 || "" %>"></label>
 
 <label>Town:<span class="req">* (required)</span>
-<input name="town" type="text" required autocomplete="address-level2"></label>
+<input name="town" type="text" required autocomplete="address-level2" value="<%= a.town || "" %>"></label>
 
 <label>Region/County:
-<input name="regionCounty" type="text" autocomplete="address-level1"></label>
+<input name="regionCounty" type="text" autocomplete="address-level1" value="<%= a.regionCounty || "" %>"></label>
 
 <label>Country:<span class="req">* (required)</span>
-<input name="country" type="text" value="UNITED KINGDOM" required autocomplete="country-name"></label>
+<input name="country" type="text" value="<%= a.country || "UNITED KINGDOM" %>" required autocomplete="country-name"></label>
 
-<label>UK Post Code (outward):
-<p class="form-hint">e.g. S1 — required for UK addresses</p>
-<input name="postcodeOut" type="text" class="input--postcode-out" placeholder="S1" maxlength="4" autocomplete="postal-code" spellcheck="false"></label>
-
-<label>UK Post Code (inward):
-<p class="form-hint">e.g. 2HE</p>
-<input name="postcodeIn" type="text" class="input--postcode-in" placeholder="2HE" maxlength="3" spellcheck="false"></label>
+<label>Postcode:
+<input name="postcode" type="text" class="input--postcode" placeholder="S1 3BA" autocomplete="postal-code" spellcheck="false" value="<%= a.postcode || "" %>"></label>
 
 <label>Telephone:
-<input name="telephone" type="tel" autocomplete="tel"></label>
+<input name="telephone" type="tel" autocomplete="tel" value="<%= a.telephone || "" %>"></label>
 
 <label>Mobile Phone:
-<input name="mobilePhone" type="tel" autocomplete="tel-national"></label>
+<input name="mobilePhone" type="tel" autocomplete="tel-national" value="<%= a.mobilePhone || "" %>"></label>
 
 <label>Email:
-<input name="email" type="email" autocomplete="email" spellcheck="false"></label>
+<input name="email" type="email" autocomplete="email" spellcheck="false" value="<%= a.email || "" %>"></label>

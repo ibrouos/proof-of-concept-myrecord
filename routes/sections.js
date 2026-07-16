@@ -78,7 +78,7 @@ router.get("/mytimetable", (req, res) => {
   });
 });
 
-// Useful Links — MUSE-style A-Z of services: letter index, lettered groups,
+// All Services — MUSE-style A-Z of services: letter index, lettered groups,
 // and a client-side text filter (progressive enhancement; the plain list
 // works without JS). Grouping happens here so the template stays dumb.
 router.get("/useful-links", (req, res) => {
@@ -92,7 +92,7 @@ router.get("/useful-links", (req, res) => {
     if (current && current.letter === letter) current.links.push(link);
     else groups.push({ letter, links: [link] });
   }
-  res.render("useful-links", { title: "Useful Links", groups });
+  res.render("useful-links", { title: "All Services", groups });
 });
 
 for (const section of sections) {

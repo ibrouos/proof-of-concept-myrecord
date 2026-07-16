@@ -111,7 +111,7 @@
 })();
 
 /**
- * Useful Links A-Z filter — hides services that don't match the query, along
+ * All Services A-Z filter — hides services that don't match the query, along
  * with any letter group (and its index chip) left empty. Purely additive:
  * without JS the full A-Z list renders and the anchors still work.
  */

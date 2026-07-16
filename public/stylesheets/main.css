@@ -1,3 +1,14 @@
+/** FONTS — the branding stylesheet only ships Source Sans Pro at 300/400/700/900,
+    so every font-weight: 600 in this file was being remapped to the 700 file by
+    the browser. Load the true semibold weight ourselves. */
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 600;
+  src: local(""), url("/fonts/source-sans-pro-v23-latin-600.woff2") format("woff2");
+}
+
+
 /** UTILITY CLASSES */
 .sr-only {
   position: absolute;
@@ -285,7 +296,6 @@ body.uosall .notification__time {
 
 .portal-nav li.nav-divider {
   border-top: 1px solid var(--hairline);
-  margin: 0.4rem 0;
 }
 
 body.uosall .portal-nav a {
@@ -1567,7 +1577,7 @@ body.uosall .tt-empty {
 }
 
 
-/** USEFUL LINKS — MUSE-style A-Z of services: filter box, letter-chip index,
+/** ALL SERVICES — MUSE-style A-Z of services: filter box, letter-chip index,
     lettered groups. The filter is progressive enhancement (script.js). */
 .az-filter {
   margin: 1.25rem 0 1rem;
@@ -2106,20 +2116,55 @@ body.uosall .its img {
 }
 
 
-/** DETAIL TABLE (personal details read-only) */
-.details-table {
+/** DETAIL LIST (personal details read-only) — same visual language as the
+    dashboard's offer-status card: bordered panel, hairline-divided rows,
+    muted label + plain value. A table here fights the branding CSS's
+    automatic row striping, which double-shades against the label column. */
+.detail-list {
+  margin: 1.25rem 0 0;
+  padding: 0 1.25rem;
   max-width: 640px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  background: var(--card-bg);
 }
 
-.details-table th {
-  width: 45%;
+.detail-list__row {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: 0.5rem 1.5rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.detail-list__row:first-child {
+  border-top: none;
+}
+
+body.uosall .detail-list__label {
+  margin: 0;
+  font-size: 0.85rem;
   font-weight: 600;
-  background: var(--surface-faint);
-  vertical-align: top;
+  color: var(--ink-soft);
 }
 
-.details-table td {
-  vertical-align: top;
+body.uosall .detail-list__value {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.detail-list__value--mono {
+  font-family: "Courier New", monospace;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 560px) {
+  .detail-list__row {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
 }
 
 
@@ -2132,20 +2177,9 @@ body.uosall .its img {
 }
 
 
-/** POSTCODE SPLIT FIELD */
-.postcode-group {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-body.uosall input.input--postcode-out {
-  width: 5rem;
-  text-transform: uppercase;
-}
-
-body.uosall input.input--postcode-in {
-  width: 4rem;
+/** POSTCODE FIELD */
+body.uosall input.input--postcode {
+  width: 9rem;
   text-transform: uppercase;
 }
 
@@ -2164,6 +2198,8 @@ body.uosall input.input--pin {
 .uosall .address-form label {
   display: block;
   margin-bottom: .5rem;
+  font-size: 16px;
+  font-weight: 600 !important;
 }
 
 .uosall .form label input,

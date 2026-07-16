@@ -1,6 +1,6 @@
 <% layout("./layout") %>
 
-<h1>Useful Links</h1>
+<h1>All Services</h1>
 <p class="guidance">
   A&ndash;Z of University services and resources. Links open in a new tab.
 </p>

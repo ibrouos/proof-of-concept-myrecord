@@ -10,7 +10,7 @@ export const NAV_ITEMS = [
   { key: "exams", href: "/exams-and-myresults", label: "Exams & MyResults", icon: "settings" },
   { key: "fees", href: "/fees-and-finance", label: "Fees & finance", icon: "paid" },
   { key: "timetable", href: "/mytimetable", label: "MyTimetable", icon: "calendar" },
-  { key: "useful-links", href: "/useful-links", label: "Useful Links", icon: "link", divider: true },
+  { key: "useful-links", href: "/useful-links", label: "All Services", icon: "link", divider: true },
 ];
 
 export function navForScenario(scenario) {

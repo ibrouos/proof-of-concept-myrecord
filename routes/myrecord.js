@@ -14,6 +14,23 @@ const MOCK_STUDENT = {
   nextOfKin: [{ name: "Professor TEST, T", relationship: "Spouse" }],
 };
 
+// Mock addresses on file, keyed by page slug. Only home-address is filled in,
+// so the addresses hub can demonstrate telling filled apart from empty.
+const MOCK_ADDRESSES = {
+  "home-address": {
+    addressLine1: "14 Fulwood Road",
+    addressLine2: "",
+    addressLine3: "",
+    town: "Sheffield",
+    regionCounty: "South Yorkshire",
+    country: "UNITED KINGDOM",
+    postcode: "S10 3BA",
+    telephone: "0114 496 0213",
+    mobilePhone: "07911 123456",
+    email: "s.blackstureg@sheffield.ac.uk",
+  },
+};
+
 // Landing on /myrecord goes to the first tab.
 router.get("/", (req, res) => {
   res.redirect("/myrecord/personal-details");
@@ -32,9 +49,14 @@ router.get("/course-information", (req, res) => {
   res.render("myrecord/course-information", { title: "Course information" });
 });
 
-// Hub page for the "Addresses" tab — links out to each address form.
+// Hub page for the "Addresses" tab — links out to each address form. Each
+// tile needs to show at a glance whether that address is on file, since
+// otherwise the only way to find out is to open every tab in turn.
 router.get("/addresses", (req, res) => {
-  res.render("myrecord/addresses", { title: "Addresses" });
+  res.render("myrecord/addresses", {
+    title: "Addresses",
+    filledSlugs: Object.keys(MOCK_ADDRESSES),
+  });
 });
 
 router.get("/correspondence-address", (req, res) => {
@@ -52,7 +74,10 @@ const addressPages = [
 
 for (const page of addressPages) {
   router.get(`/${page.slug}`, (req, res) => {
-    res.render(`myrecord/${page.slug}`, { title: page.title });
+    res.render(`myrecord/${page.slug}`, {
+      title: page.title,
+      address: MOCK_ADDRESSES[page.slug] || null,
+    });
   });
 
   router.post(`/${page.slug}`, (req, res) => {

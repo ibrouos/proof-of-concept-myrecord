@@ -33,7 +33,7 @@
     { "href": "/mytimetable", "icon": "calendar", "title": "MyTimetable", "desc": "Teaching and exam timetables" },
     { "href": "/fees-and-finance", "icon": "paid", "title": "Fees & finance", "desc": "Balance and due dates" },
     { "href": "/programmes-and-modules", "icon": "apps", "title": "Programmes and modules", "desc": "Enrolled modules and credits" },
-    { "href": "/useful-links", "icon": "link", "title": "Useful Links", "desc": "Quick links to other University services" }
+    { "href": "/useful-links", "icon": "link", "title": "All Services", "desc": "Quick links to other University services" }
   ],
   "keyDates": [
     { "day": "9", "month": "Oct", "title": "Programme confirmation due", "sub": "Review and consent" },
