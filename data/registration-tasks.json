@@ -1,0 +1,44 @@
+{
+  "title": "Online registration",
+  "intro": "The tasks that only make sense once your place, course, and modules are actually confirmed. Complete these to finish registering for 2026-27.",
+  "groups": [
+    {
+      "title": "Confirm your studies",
+      "tasks": [
+        { "title": "Academic programme details", "desc": "Confirms the details of your specific academic programme — course structure and department.", "pill": "Required", "tone": "danger" },
+        { "title": "Module choice", "desc": "Choose your optional or elective modules.", "pill": "Required", "tone": "danger" },
+        { "title": "Course details confirmation", "desc": "The finalised details of your specific course, confirmed once your place and results are in.", "pill": "Required", "tone": "danger" },
+        { "title": "Semester dates, calendar & attendance", "desc": "Term dates, the academic calendar, and the University's attendance-monitoring policy.", "pill": "Reference", "tone": "neutral" }
+      ]
+    },
+    {
+      "title": "Finish setting up",
+      "tasks": [
+        { "title": "IT security & digital skills training", "desc": "Mandatory cyber-security awareness training and a guide to the software and apps you'll use day to day.", "pill": "Required", "tone": "danger" },
+        { "title": "UCard photo & issue", "desc": "Submit your photo and get your UCard issued — your student ID, library card, and building pass.", "pill": "Required", "tone": "danger" },
+        { "title": "UK bank account details", "desc": "Set up a UK bank account — needed to receive maintenance loan payments.", "pill": "Required", "tone": "danger" }
+      ]
+    },
+    {
+      "title": "Your welfare on campus",
+      "tasks": [
+        { "title": "Disability declaration", "desc": "Tell us about any disability or support needs now you're registered, so support can be put in place.", "pill": "Recommended", "tone": "neutral" },
+        { "title": "Health & safety induction", "desc": "Health & safety essentials, given once you're on campus or about to be.", "pill": "Recommended", "tone": "neutral" }
+      ]
+    },
+    {
+      "title": "Fees & civic admin",
+      "tasks": [
+        { "title": "Arrange fee payment", "desc": "Arrange how you'll actually pay your confirmed tuition fees — the final step after the earlier fee status check.", "pill": "Required", "tone": "danger" },
+        { "title": "Electoral registration", "desc": "Encourages electoral (voter) registration at your term-time address.", "pill": "Optional", "tone": "neutral" },
+        { "title": "Students' Union membership", "desc": "Introduces the Students' Union and lets you opt out of automatic SU membership.", "pill": "Optional", "tone": "neutral" }
+      ]
+    },
+    {
+      "title": "Complete registration",
+      "tasks": [
+        { "title": "Complete online registration", "desc": "The core action itself — confirming your registration, done once a year.", "pill": "Required", "tone": "danger" }
+      ]
+    }
+  ]
+}

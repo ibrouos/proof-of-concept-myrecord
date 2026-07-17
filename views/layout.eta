@@ -206,16 +206,30 @@
       <% } %>
     </nav>
 
-    <!-- Demo scenario switcher — fixed corner dropdown, prototype-only control.
-         GET form so it works without JS (script.js submits on change). -->
-    <form class="demo-widget" method="GET" action="/">
-      <label class="demo-widget__label" for="demo-scenario-select">Demo scenario</label>
-      <select id="demo-scenario-select" name="view">
-        <% it.scenarioOptions.forEach(function (opt) { %>
-        <option value="<%= opt.key %>"<%~ opt.key === it.scenarioKey ? " selected" : "" %>><%= opt.label %></option>
-        <% }) %>
-      </select>
-    </form>
+    <!-- Demo scenario switcher — fixed corner widget, prototype-only control.
+         Collapsible (script.js remembers the state in localStorage); the
+         underlying form still works without JS, just always expanded. -->
+    <div class="demo-widget" id="demo-widget">
+      <button
+        type="button"
+        class="demo-widget__toggle"
+        id="demo-widget-toggle"
+        aria-expanded="true"
+        aria-controls="demo-widget-panel"
+      >
+        <%~ include("./partials/icon", { name: "settings" }) %>
+        <span class="demo-widget__toggle-text">Demo scenario</span>
+        <%~ include("./partials/icon", { name: "chevron", cls: "icon--demo-chevron" }) %>
+      </button>
+      <form class="demo-widget__panel" id="demo-widget-panel" method="GET" action="/">
+        <label class="demo-widget__label" for="demo-scenario-select">Preview a different stage of the student journey</label>
+        <select id="demo-scenario-select" name="view">
+          <% it.scenarioOptions.forEach(function (opt) { %>
+          <option value="<%= opt.key %>"<%~ opt.key === it.scenarioKey ? " selected" : "" %>><%= opt.label %></option>
+          <% }) %>
+        </select>
+      </form>
+    </div>
 
     <script src="https://www.sheffield.ac.uk/branding/webapps/1.0/js/script.js"></script>
     <script src="/javascripts/script.js"></script>

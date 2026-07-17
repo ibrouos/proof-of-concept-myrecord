@@ -1,7 +1,7 @@
 {
   "label": "Pre-arrival — course confirmed",
   "courseLine": "BSc Computer Science · starts 28 September 2026",
-  "nav": ["dashboard", "myrecord", "fees", "timetable", "useful-links"],
+  "nav": ["dashboard", "myrecord", "fees", "pre-registration-tasks", "timetable", "useful-links"],
   "banner": {
     "title": "Welcome to Sheffield — get ready to start",
     "lead": "Online registration opens Monday 14 September 2026.",
@@ -70,7 +70,7 @@
     ]
   },
   "manage": [
-    { "href": "/myrecord", "icon": "person", "title": "MyRecord", "desc": "Personal details and contact information" },
+    { "href": "/myrecord", "icon": "person", "title": "Personal information", "desc": "Personal details and contact information" },
     { "href": "/fees-and-finance", "icon": "paid", "title": "Fees & funding", "desc": "Tuition fees, loans, and scholarships" },
     { "href": "/useful-links", "icon": "link", "title": "All Services", "desc": "Quick links to other University services" }
   ],

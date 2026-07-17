@@ -77,7 +77,7 @@
 
 <ul class="task-list">
   <% dash.actions.forEach(function (a) { %>
-  <li class="task">
+  <li class="task<%= a.tone === "danger" ? " task--required" : "" %>">
     <div class="task__body">
       <div class="task__head">
         <h3 class="task__title"><%= a.title %></h3>

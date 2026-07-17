@@ -107,22 +107,4 @@ router.post("/future-address", (req, res) => {
   res.redirect("/myrecord/future-address");
 });
 
-router.get("/ucard-pin", (req, res) => {
-  res.render("myrecord/ucard-pin", { title: "Change UCARD PIN number" });
-});
-
-router.post("/ucard-pin", (req, res) => {
-  const { oldPin, newPin, confirmPin } = req.body;
-  if (!oldPin?.trim() || !newPin?.trim() || !confirmPin?.trim()) {
-    req.flash("error", "All PIN fields are required.");
-    return res.redirect("/myrecord/ucard-pin");
-  }
-  if (newPin !== confirmPin) {
-    req.flash("error", "New PIN and confirmation do not match. Please try again.");
-    return res.redirect("/myrecord/ucard-pin");
-  }
-  req.flash("success", "UCard PIN changed successfully.");
-  res.redirect("/myrecord/ucard-pin");
-});
-
 export default router;

@@ -1,14 +1,15 @@
 import { Router } from "express";
 import timetable from "../data/timetable.json" with { type: "json" };
 import usefulLinks from "../data/useful-links.json" with { type: "json" };
+import preRegistrationTasks from "../data/pre-registration-tasks.json" with { type: "json" };
+import registrationTasks from "../data/registration-tasks.json" with { type: "json" };
 
 const router = Router();
 
-// Top-level sidebar sections (other than MyRecord, which has its own router).
+// Top-level sidebar sections (other than Personal information, which has its own router).
 const sections = [
   { slug: "exams-and-myresults", title: "Exams & MyResults" },
   { slug: "fees-and-finance", title: "Fees & finance" },
-  { slug: "online-registration", title: "Online registration" },
   { slug: "your-offer", title: "Your offer" },
   { slug: "accommodation", title: "Accommodation" },
   { slug: "getting-started", title: "Getting started" },
@@ -95,10 +96,46 @@ router.get("/useful-links", (req, res) => {
   res.render("useful-links", { title: "All Services", groups });
 });
 
+// Pre-registration tasks — the checklist an offer holder works through once
+// their place is confirmed, before they can complete Online Registration.
+// Scoped to the New UG – Home persona for now; the real system varies this
+// list by applicant type (Intl/PG/exchange/returning), which isn't modelled
+// here yet.
+router.get("/pre-registration-tasks", (req, res) => {
+  res.render("pre-registration-tasks", { title: "Pre-registration tasks", tasks: preRegistrationTasks });
+});
+
+// Online registration — the checklist that only makes sense once a place,
+// course, and modules are confirmed (Phase 2). Same template as
+// pre-registration-tasks; only the data differs. Scoped to New UG – Home.
+router.get("/online-registration", (req, res) => {
+  res.render("pre-registration-tasks", { title: "Online registration", tasks: registrationTasks });
+});
+
 for (const section of sections) {
   router.get(`/${section.slug}`, (req, res) => {
     res.render("section-placeholder", { title: section.title });
   });
 }
+
+// UCard PIN — lives in the main sidebar rather than as a Personal information
+// tab, since changing your PIN isn't really "your record", it's UCard admin.
+router.get("/ucard-pin", (req, res) => {
+  res.render("ucard-pin", { title: "Change UCARD PIN number" });
+});
+
+router.post("/ucard-pin", (req, res) => {
+  const { oldPin, newPin, confirmPin } = req.body;
+  if (!oldPin?.trim() || !newPin?.trim() || !confirmPin?.trim()) {
+    req.flash("error", "All PIN fields are required.");
+    return res.redirect("/ucard-pin");
+  }
+  if (newPin !== confirmPin) {
+    req.flash("error", "New PIN and confirmation do not match. Please try again.");
+    return res.redirect("/ucard-pin");
+  }
+  req.flash("success", "UCard PIN changed successfully.");
+  res.redirect("/ucard-pin");
+});
 
 export default router;

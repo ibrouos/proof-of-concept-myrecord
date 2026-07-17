@@ -1,7 +1,7 @@
 {
   "label": "Registered — consent needed",
   "courseLine": "CS1IBR - Computer Science, Year 3",
-  "nav": ["dashboard", "myrecord", "programmes", "exams", "fees", "timetable", "useful-links"],
+  "nav": ["dashboard", "myrecord", "programmes", "exams", "fees", "ucard", "timetable", "useful-links"],
   "banner": {
     "title": "Confirm your programme for 2026-27",
     "lead": "Confirm by Friday 9 October 2026.",
@@ -28,7 +28,7 @@
     }
   ],
   "manage": [
-    { "href": "/myrecord", "icon": "person", "title": "MyRecord", "desc": "Personal details, addresses, UCARD" },
+    { "href": "/myrecord", "icon": "person", "title": "Personal information", "desc": "Personal details and addresses" },
     { "href": "/exams-and-myresults", "icon": "settings", "title": "Exams & MyResults", "desc": "View marks and outcomes" },
     { "href": "/mytimetable", "icon": "calendar", "title": "MyTimetable", "desc": "Teaching and exam timetables" },
     { "href": "/fees-and-finance", "icon": "paid", "title": "Fees & finance", "desc": "Balance and due dates" },

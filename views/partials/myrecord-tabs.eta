@@ -1,7 +1,9 @@
 <%
-  /* MyRecord sub-navigation — 4 grouped underline tabs. The six address pages all
-     live under the "Addresses" tab; its hub page (/myrecord/addresses) links
-     out to each one, keeping this bar short and scannable. */
+  /* Personal information sub-navigation — 3 grouped underline tabs. The six
+     address pages all live under the "Addresses" tab; its hub page
+     (/myrecord/addresses) links out to each one, keeping this bar short and
+     scannable. UCard PIN lives in the main sidebar instead — it's UCard
+     admin, not part of the student's own record. */
   const ADDRESS_PATHS = [
     "/myrecord/addresses",
     "/myrecord/sheffield-address",
@@ -15,12 +17,11 @@
     { href: "/myrecord/personal-details", label: "Personal details" },
     { href: "/myrecord/course-information", label: "Course information" },
     { href: "/myrecord/addresses", label: "Addresses", match: ADDRESS_PATHS },
-    { href: "/myrecord/ucard-pin", label: "UCARD PIN" },
   ];
   const isTabActive = (tab) => tab.match ? tab.match.includes(it.path) : it.path === tab.href;
   const onAddressSubpage = ADDRESS_PATHS.includes(it.path) && it.path !== "/myrecord/addresses";
 %>
-<nav class="subnav" aria-label="myRecord sections">
+<nav class="subnav" aria-label="Personal information sections">
   <ul>
     <% tabs.forEach(function (tab) { %>
     <li>

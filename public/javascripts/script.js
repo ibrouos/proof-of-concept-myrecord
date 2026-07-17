@@ -92,15 +92,46 @@
 
 /**
  * Demo scenario widget — fixed corner dropdown of lifecycle states. Choosing
- * one submits the GET form (works without JS via Enter). Prototype-only.
+ * one submits the GET form (works without JS via Enter). The toggle button
+ * collapses the panel down to just its header row; the choice is remembered
+ * in localStorage so it stays out of the way across page loads. Prototype-only.
  */
 (function () {
+  var STORAGE_KEY = "demoWidgetCollapsed";
+
   function init() {
+    var widget = document.getElementById("demo-widget");
+    var toggle = document.getElementById("demo-widget-toggle");
     var select = document.getElementById("demo-scenario-select");
-    if (!select) return;
-    select.addEventListener("change", function () {
-      select.form.submit();
+    if (!widget || !toggle) return;
+
+    function setCollapsed(collapsed) {
+      widget.classList.toggle("is-collapsed", collapsed);
+      toggle.setAttribute("aria-expanded", String(!collapsed));
+      try {
+        localStorage.setItem(STORAGE_KEY, collapsed ? "1" : "0");
+      } catch (e) {
+        // localStorage unavailable (private browsing, etc.) — state just won't persist.
+      }
+    }
+
+    var storedCollapsed = null;
+    try {
+      storedCollapsed = localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+      // ignore
+    }
+    setCollapsed(storedCollapsed === "1");
+
+    toggle.addEventListener("click", function () {
+      setCollapsed(!widget.classList.contains("is-collapsed"));
     });
+
+    if (select) {
+      select.addEventListener("change", function () {
+        select.form.submit();
+      });
+    }
   }
 
   if (document.readyState === "loading") {

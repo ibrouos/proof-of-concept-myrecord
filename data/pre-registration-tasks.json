@@ -1,0 +1,44 @@
+{
+  "title": "Pre-registration tasks",
+  "intro": "General onboarding you can get through regardless of whether your results have landed yet. Nothing here needs doing right now — this is what's coming. Scoped to New UG – Home; other applicant types (international, postgraduate, exchange) see a different set.",
+  "groups": [
+    {
+      "title": "Your place & funding",
+      "tasks": [
+        { "title": "Admission checks", "desc": "Confirms you meet your offer conditions (grades, references, documents) and requires sign-off on the University's admissions policy.", "pill": "Required", "tone": "danger" },
+        { "title": "Equivalent qualification check (ELQ)", "desc": "A UK funding-eligibility rule for students who already hold a degree at the same level or higher — affects whether you can get government student finance for a second one.", "pill": "If applicable", "tone": "neutral" },
+        { "title": "Fee information", "desc": "Confirms your tuition fee status and rate for 2026-27. How you'll actually arrange payment comes later, once registration opens.", "pill": "Required", "tone": "danger" },
+        { "title": "Funding calculator & budgeting", "desc": "Tools to estimate your government funding entitlement and plan a student budget.", "pill": "Recommended", "tone": "neutral", "done": true },
+        { "title": "Refund policy", "desc": "Explains the University's policy on refunding tuition fees, for example if you withdraw.", "pill": "Reference", "tone": "neutral" },
+        { "title": "Sponsor letter", "desc": "If a third party — an employer, government body, or scholarship scheme — is sponsoring your fees, this is where you upload their sponsorship letter.", "pill": "If applicable", "tone": "neutral" }
+      ]
+    },
+    {
+      "title": "Getting set up early",
+      "tasks": [
+        { "title": "IT account activation", "desc": "Activate your University IT account, email, and password — the first thing you'll need once you accept your place.", "pill": "Required", "tone": "danger" },
+        { "title": "Passport / ID verification", "desc": "Verifying your passport or identity document — an early admissions step, done well before enrolment.", "pill": "Required", "tone": "danger" }
+      ]
+    },
+    {
+      "title": "Your welfare",
+      "tasks": [
+        { "title": "Health", "desc": "Register with a doctor and share any relevant health information.", "pill": "Recommended", "tone": "neutral" },
+        { "title": "Mentoring", "desc": "Sign up for a peer mentoring scheme.", "pill": "Recommended", "tone": "neutral", "done": true },
+        { "title": "Parent/guardian consent", "desc": "Parental or guardian consent, required specifically for entrants under 18.", "pill": "If applicable", "tone": "neutral" }
+      ]
+    },
+    {
+      "title": "Policies & your rights",
+      "tasks": [
+        { "title": "Policy pack", "desc": "A bundle of one-time acknowledgements: data protection notice, equality policy, your rights, the University's general regulations, student code of conduct, academic integrity policy, complaints procedure, and freedom of speech/expression policy.", "pill": "Required", "tone": "danger" }
+      ]
+    },
+    {
+      "title": "Getting to know Sheffield",
+      "tasks": [
+        { "title": "Community, welcome & location", "desc": "General welcome and orientation content, local community information, and where things are on campus and in the city.", "pill": "Reference", "tone": "neutral", "done": true }
+      ]
+    }
+  ]
+}

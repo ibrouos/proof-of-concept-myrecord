@@ -1,0 +1,28 @@
+<% layout("./layout") %>
+
+<h1><%= it.tasks.title %></h1>
+<p class="guidance"><%= it.tasks.intro %></p>
+
+<% it.tasks.groups.forEach(function (group) { %>
+<section aria-labelledby="reg-group-<%= group.title.replace(/[^a-z0-9]+/gi, "-").toLowerCase() %>">
+  <h2 class="dash-section-title" id="reg-group-<%= group.title.replace(/[^a-z0-9]+/gi, "-").toLowerCase() %>"><%= group.title %></h2>
+  <ul class="task-list">
+    <% group.tasks.forEach(function (task) { %>
+    <li class="task<%= task.tone === "danger" ? " task--required" : "" %>">
+      <div class="task__body">
+        <div class="task__head">
+          <h3 class="task__title"><%= task.title %></h3>
+          <span class="pill pill--<%= task.tone %>"><%= task.pill %></span>
+        </div>
+        <p class="task__desc"><%= task.desc %></p>
+      </div>
+      <% if (task.done) { %>
+      <span class="task-status task-status--done">Completed</span>
+      <% } else { %>
+      <span class="task-status">Not started</span>
+      <% } %>
+    </li>
+    <% }) %>
+  </ul>
+</section>
+<% }) %>

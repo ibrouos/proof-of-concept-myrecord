@@ -1,7 +1,7 @@
 {
-  "label": "Current student — registration open",
+  "label": "Registration Open",
   "courseLine": "CS1IBR - Computer Science, Year 3",
-  "nav": ["dashboard", "myrecord", "programmes", "exams", "fees", "timetable", "useful-links"],
+  "nav": ["dashboard", "myrecord", "programmes", "exams", "fees", "online-registration", "ucard", "timetable", "useful-links"],
   "banner": {
     "title": "Online registration for 2026-27 is open",
     "lead": "Register by Friday 25 September 2026.",
@@ -28,7 +28,7 @@
     }
   ],
   "manage": [
-    { "href": "/myrecord", "icon": "person", "title": "MyRecord", "desc": "Personal details, addresses, UCARD" },
+    { "href": "/myrecord", "icon": "person", "title": "Personal information", "desc": "Personal details and addresses" },
     { "href": "/exams-and-myresults", "icon": "settings", "title": "Exams & MyResults", "desc": "View marks and outcomes — 2 new results" },
     { "href": "/mytimetable", "icon": "calendar", "title": "MyTimetable", "desc": "Teaching and exam timetables" },
     { "href": "/fees-and-finance", "icon": "paid", "title": "Fees & finance", "desc": "Balance and due dates — payment due 31 July" },

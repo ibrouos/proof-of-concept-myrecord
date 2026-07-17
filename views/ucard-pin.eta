@@ -1,11 +1,10 @@
-<% layout("../layout") %>
-<%~ include("../partials/myrecord-tabs", it) %>
+<% layout("./layout") %>
 
 <h1>Change UCARD PIN number</h1>
 
 <p class="guidance">Your UCard PIN must be kept secret. Choose a number you will remember.</p>
 
-<form method="POST" action="/myrecord/ucard-pin" class="pin-form">
+<form method="POST" action="/ucard-pin" class="pin-form">
   <input type="hidden" name="_csrf" value="<%= it.csrfToken %>" />
 
   <label>Current PIN:<span class="req">* (required)</span>

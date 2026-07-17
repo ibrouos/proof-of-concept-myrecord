@@ -5,10 +5,13 @@
 // gets everything (safe default for new states).
 export const NAV_ITEMS = [
   { key: "dashboard", href: "/", label: "Dashboard", icon: "dashboard", exact: true },
-  { key: "myrecord", href: "/myrecord", label: "MyRecord", icon: "person" },
+  { key: "myrecord", href: "/myrecord", label: "Personal information", icon: "person" },
   { key: "programmes", href: "/programmes-and-modules", label: "Programmes and modules", icon: "apps" },
   { key: "exams", href: "/exams-and-myresults", label: "Exams & MyResults", icon: "settings" },
   { key: "fees", href: "/fees-and-finance", label: "Fees & finance", icon: "paid" },
+  { key: "pre-registration-tasks", href: "/pre-registration-tasks", label: "Pre-registration tasks", icon: "book" },
+  { key: "online-registration", href: "/online-registration", label: "Online registration", icon: "book" },
+  { key: "ucard", href: "/ucard-pin", label: "UCard", icon: "card" },
   { key: "timetable", href: "/mytimetable", label: "MyTimetable", icon: "calendar" },
   { key: "useful-links", href: "/useful-links", label: "All Services", icon: "link", divider: true },
 ];
