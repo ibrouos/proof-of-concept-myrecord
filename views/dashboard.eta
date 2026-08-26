@@ -91,6 +91,20 @@
 </ul>
 <% } %>
 
+<h2 class="dash-section-title">Manage</h2>
+
+<div class="manage-grid">
+  <% dash.manage.forEach(function (card) { %>
+  <a class="manage-card" href="<%= card.href %>">
+    <span class="manage-card__head">
+      <%~ include("./partials/icon", { name: card.icon, cls: "icon--manage" }) %>
+      <span class="manage-card__title"><%= card.title %></span>
+    </span>
+    <span class="manage-card__desc"><%= card.desc %></span>
+  </a>
+  <% }) %>
+</div>
+
 <% if (dash.discover) { %>
 <section aria-labelledby="discover-title">
   <h2 class="dash-section-title" id="discover-title"><%= dash.discover.title %></h2>
@@ -118,20 +132,6 @@
   </div>
 </section>
 <% } %>
-
-<h2 class="dash-section-title">Manage</h2>
-
-<div class="manage-grid">
-  <% dash.manage.forEach(function (card) { %>
-  <a class="manage-card" href="<%= card.href %>">
-    <span class="manage-card__head">
-      <%~ include("./partials/icon", { name: card.icon, cls: "icon--manage" }) %>
-      <span class="manage-card__title"><%= card.title %></span>
-    </span>
-    <span class="manage-card__desc"><%= card.desc %></span>
-  </a>
-  <% }) %>
-</div>
 
 <section aria-labelledby="keydates-title">
   <h2 class="dash-section-title" id="keydates-title">Key dates</h2>
