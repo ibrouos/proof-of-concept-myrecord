@@ -6,5 +6,6 @@
 <form method="POST" action="/myrecord/landlords-address" class="address-form">
   <input type="hidden" name="_csrf" value="<%= it.csrfToken %>" />
   <%~ include("../partials/address-fields", it) %>
+  <%~ include("../partials/address-end-date", it) %>
   <button type="submit">Save address</button>
 </form>

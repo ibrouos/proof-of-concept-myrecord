@@ -1,0 +1,5 @@
+<% const a = it.address || {}; %>
+<div class="field-readonly">
+  <span class="field-readonly__label">End Date:</span>
+  <span class="field-readonly__value"><%= a.endDate || "—" %></span>
+</div>

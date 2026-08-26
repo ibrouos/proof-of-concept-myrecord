@@ -1,4 +1,23 @@
-<% const a = it.address || {}; %>
+<%
+  const a = it.address || {};
+  const countries = it.countries || [];
+  const residentialTypes = [
+    "Not resident",
+    "University accommodation",
+    "Private rented",
+    "Owner occupied",
+    "Living with parent/guardian",
+    "Other",
+  ];
+%>
+<label>Residential Type:<span class="req">* (required)</span>
+<select name="residentialType" required>
+  <option value="">Please select…</option>
+  <% residentialTypes.forEach(function (type) { %>
+  <option value="<%= type %>" <%= a.residentialType === type ? "selected" : "" %>><%= type %></option>
+  <% }) %>
+</select></label>
+
 <label>Address Line 1:<span class="req">* (required)</span>
 <input name="addressLine1" type="text" required autocomplete="address-line1" value="<%= a.addressLine1 || "" %>"></label>
 
@@ -15,10 +34,22 @@
 <input name="regionCounty" type="text" autocomplete="address-level1" value="<%= a.regionCounty || "" %>"></label>
 
 <label>Country:<span class="req">* (required)</span>
-<input name="country" type="text" value="<%= a.country || "UNITED KINGDOM" %>" required autocomplete="country-name"></label>
+<select name="country" id="address-country" required autocomplete="country-name">
+  <% countries.forEach(function (c) { %>
+  <option value="<%= c %>" <%= (a.country || "UNITED KINGDOM") === c ? "selected" : "" %>><%= c %></option>
+  <% }) %>
+</select></label>
 
-<label>Postcode:
-<input name="postcode" type="text" class="input--postcode" placeholder="S1 3BA" autocomplete="postal-code" spellcheck="false" value="<%= a.postcode || "" %>"></label>
+<div class="field-group">
+  <span class="field-group__label">UK Post Code:</span>
+  <div class="field-group__inputs">
+    <label class="sr-only" for="postcode-outward">Outward code</label>
+    <input id="postcode-outward" name="postcodeOutward" type="text" class="input--postcode input--postcode-outward" placeholder="S40" maxlength="4" autocomplete="postal-code" spellcheck="false" value="<%= a.postcodeOutward || "" %>">
+    <label class="sr-only" for="postcode-inward">Inward code</label>
+    <input id="postcode-inward" name="postcodeInward" type="text" class="input--postcode input--postcode-inward" placeholder="7FG" maxlength="3" autocomplete="off" spellcheck="false" value="<%= a.postcodeInward || "" %>">
+  </div>
+  <p class="form-hint">Required for UK addresses.</p>
+</div>
 
 <label>Telephone:
 <input name="telephone" type="tel" autocomplete="tel" value="<%= a.telephone || "" %>"></label>

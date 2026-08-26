@@ -2287,10 +2287,54 @@ body.uosall .detail-list__value {
 }
 
 
-/** POSTCODE FIELD */
+/** POSTCODE FIELD — split outward/inward codes sit side by side under one
+    group label, e.g. S40 / 7FG. */
+.field-group {
+  margin-bottom: 0.5rem;
+}
+
+.field-group__label {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.field-group__inputs {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
 body.uosall input.input--postcode {
-  width: 9rem;
   text-transform: uppercase;
+}
+
+body.uosall input.input--postcode-outward {
+  width: 5rem;
+}
+
+body.uosall input.input--postcode-inward {
+  width: 4rem;
+}
+
+
+/** READ-ONLY FIELD — e.g. End Date, which the record shows but doesn't
+    expose an input for (system-managed). Matches the label/value rhythm of
+    the surrounding form fields without implying it can be edited. */
+.field-readonly {
+  margin-bottom: 0.5rem;
+}
+
+.field-readonly__label {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.field-readonly__value {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--ink-soft);
 }
 
 
@@ -2316,7 +2360,8 @@ body.uosall input.input--pin {
 .uosall .form label select,
 .uosall .form label textarea,
 .uosall .pin-form label input,
-.uosall .address-form label input {
+.uosall .address-form label input,
+.uosall .address-form label select {
   display: block;
   margin-top: 0.25rem;
   margin-bottom: 0;

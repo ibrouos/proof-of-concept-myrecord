@@ -13,7 +13,7 @@ export const scenarios = {
   consent,
 };
 
-export const DEFAULT_SCENARIO = "student";
+export const DEFAULT_SCENARIO = "consent";
 
 export function currentScenarioKey(req) {
   return scenarios[req.session?.scenario] ? req.session.scenario : DEFAULT_SCENARIO;

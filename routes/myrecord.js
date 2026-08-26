@@ -1,4 +1,5 @@
 import { Router } from "express";
+import countries from "../data/countries.json" with { type: "json" };
 
 const router = Router();
 
@@ -18,16 +19,19 @@ const MOCK_STUDENT = {
 // so the addresses hub can demonstrate telling filled apart from empty.
 const MOCK_ADDRESSES = {
   "home-address": {
+    residentialType: "Owner occupied",
     addressLine1: "14 Fulwood Road",
     addressLine2: "",
     addressLine3: "",
     town: "Sheffield",
     regionCounty: "South Yorkshire",
     country: "UNITED KINGDOM",
-    postcode: "S10 3BA",
+    postcodeOutward: "S10",
+    postcodeInward: "3BA",
     telephone: "0114 496 0213",
     mobilePhone: "07911 123456",
     email: "s.blackstureg@sheffield.ac.uk",
+    endDate: "",
   },
 };
 
@@ -77,13 +81,18 @@ for (const page of addressPages) {
     res.render(`myrecord/${page.slug}`, {
       title: page.title,
       address: MOCK_ADDRESSES[page.slug] || null,
+      countries,
     });
   });
 
   router.post(`/${page.slug}`, (req, res) => {
-    const { addressLine1, town, country } = req.body;
-    if (!addressLine1?.trim() || !town?.trim() || !country?.trim()) {
-      req.flash("error", "Address Line 1, Town, and Country are required.");
+    const { residentialType, addressLine1, town, country, postcodeOutward, postcodeInward } = req.body;
+    if (!residentialType?.trim() || !addressLine1?.trim() || !town?.trim() || !country?.trim()) {
+      req.flash("error", "Residential Type, Address Line 1, Town, and Country are required.");
+      return res.redirect(`/myrecord/${page.slug}`);
+    }
+    if (country.trim().toUpperCase() === "UNITED KINGDOM" && (!postcodeOutward?.trim() || !postcodeInward?.trim())) {
+      req.flash("error", "Post Code is required for UK addresses.");
       return res.redirect(`/myrecord/${page.slug}`);
     }
     req.flash("success", page.success);
@@ -94,13 +103,18 @@ for (const page of addressPages) {
 router.get("/future-address", (req, res) => {
   res.render("myrecord/future-address", {
     title: "Define a correspondence or future address",
+    countries,
   });
 });
 
 router.post("/future-address", (req, res) => {
-  const { addressType, addressLine1, town, country, startDate } = req.body;
-  if (!addressType || !addressLine1?.trim() || !town?.trim() || !country?.trim() || !startDate?.trim()) {
-    req.flash("error", "Address Type, Address Line 1, Town, Country, and Start Date are required.");
+  const { addressType, residentialType, addressLine1, town, country, startDate, postcodeOutward, postcodeInward } = req.body;
+  if (!addressType || !residentialType?.trim() || !addressLine1?.trim() || !town?.trim() || !country?.trim() || !startDate?.trim()) {
+    req.flash("error", "Address Type, Residential Type, Address Line 1, Town, Country, and Start Date are required.");
+    return res.redirect("/myrecord/future-address");
+  }
+  if (country.trim().toUpperCase() === "UNITED KINGDOM" && (!postcodeOutward?.trim() || !postcodeInward?.trim())) {
+    req.flash("error", "Post Code is required for UK addresses.");
     return res.redirect("/myrecord/future-address");
   }
   req.flash("success", "Future address added successfully.");
