@@ -896,6 +896,11 @@ body.uosall a.discover-card:hover {
   --discover-tint: #e2f2fa;
 }
 
+.discover-card--gold {
+  --discover-accent: #8a5a00;
+  --discover-tint: #faf1de;
+}
+
 
 /** DASHBOARD — Key dates. The academic year set as a quiet timeline:
     right-aligned date column, violet node on a hairline rail, event and

@@ -1,14 +1,7 @@
 {
-  "label": "Registered — consent needed",
+  "label": "Registered — Student Record State",
   "courseLine": "CS1IBR - Computer Science, Year 3",
   "nav": ["dashboard", "myrecord", "programmes", "exams", "fees", "ucard", "timetable", "useful-links"],
-  "banner": {
-    "title": "Confirm your programme for 2026-27",
-    "lead": "Confirm by Friday 9 October 2026.",
-    "desc": "You're registered — now review your enrolled modules and confirm your programme of study so your student record is complete.",
-    "cta": "Review and confirm",
-    "href": "/programmes-and-modules"
-  },
   "actions": [
     {
       "pill": "Required",
@@ -27,6 +20,47 @@
       "href": "/myrecord/personal-details"
     }
   ],
+  "discover": {
+    "title": "Student support services",
+    "intro": "Support that's there throughout your studies, whenever you need it.",
+    "cards": [
+      {
+        "icon": "people",
+        "theme": "purple",
+        "title": "Student Supervisors",
+        "desc": "Your supervisor is your first point of contact for academic guidance and project support.",
+        "href": "https://www.sheffield.ac.uk/students/your-studies/supervision"
+      },
+      {
+        "icon": "person",
+        "theme": "coral",
+        "title": "Personal Tutoring",
+        "desc": "A named tutor who supports you through your degree, from settling in to planning ahead.",
+        "href": "https://www.sheffield.ac.uk/students/your-studies/personal-tutor"
+      },
+      {
+        "icon": "fitness",
+        "theme": "green",
+        "title": "Health & Wellbeing",
+        "desc": "Free, confidential support for your mental and physical health while you study.",
+        "href": "https://www.sheffield.ac.uk/students/health-and-wellbeing"
+      },
+      {
+        "icon": "contacts",
+        "theme": "aqua",
+        "title": "Disability Support",
+        "desc": "Reasonable adjustments and specialist advice, tailored to how you learn best.",
+        "href": "https://www.sheffield.ac.uk/disability"
+      },
+      {
+        "icon": "place",
+        "theme": "gold",
+        "title": "Placements & Study Abroad",
+        "desc": "Explore work placements and exchange opportunities to take your degree further.",
+        "href": "https://www.sheffield.ac.uk/students/placements-and-study-abroad"
+      }
+    ]
+  },
   "manage": [
     { "href": "/myrecord", "icon": "person", "title": "Personal information", "desc": "Personal details and addresses" },
     { "href": "/exams-and-myresults", "icon": "settings", "title": "Exams & MyResults", "desc": "View marks and outcomes" },
